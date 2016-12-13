@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { SampleModule } from './sample';
 
 import { AppComponent } from './app.component';
 
@@ -14,8 +13,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    SampleModule
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
