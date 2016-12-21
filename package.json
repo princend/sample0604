@@ -12,7 +12,8 @@
     },
     "private": true,
     "dependencies": {
-        "@cmuh/components": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/components"
+        "@cmuh/components": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/components",
+        "@cmuh/scss": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/scss"
     },
     "devDependencies": {
         "@angular/common": "2.2.1",
