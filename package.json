@@ -12,7 +12,7 @@
   },
   "private": true,
   "dependencies": {
-    "@cmuh/components": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/components",
+
     "@cmuh/http": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/http.git",
     "@cmuh/scss": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/scss.git"
   },
