@@ -1,18 +1,34 @@
 import { Injectable } from '@angular/core';
+
 import { HttpWrapperService } from '@cmuh/http';
+import { UserInfo } from '@cmuh-viewmodel/sample';
+
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
+
 @Injectable()
 export class SampleService {
 
-  constructor(private http:HttpWrapperService) { }
+  /**
+   * constructor建構函式
+   */
+  constructor(private http: HttpWrapperService) { }
 
-  public getData(id:number):Observable<any>{
+  /**
+   * 取得userInfo
+   * @param {string} id
+   * @returns {Observable<UserInfo>} 
+   */
+  public getUserInfo(id: string): Observable<UserInfo> {
 
-    let url = 'http://10.21.11.225/webapi/sample/userInfo/';
-    return this.http.get(`${url}${id}`).map((res)=>{
-      return res.json();
-    })
+    let hostname: string = 'http://10.21.11.225/';
+    let path: string = 'webapi/sample/userInfo/';
+
+    return this.http
+      .get(`${hostname}${path}${id}`)
+      .map((res) => {
+        return res.json();
+      });
   }
 
 }

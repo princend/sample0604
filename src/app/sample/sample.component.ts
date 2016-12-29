@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
+import { UserInfo } from '@cmuh-viewmodel/sample';
+
 import { SampleService } from './sample.service';
 
 @Component({
@@ -9,15 +12,28 @@ import { SampleService } from './sample.service';
 export class SampleComponent implements OnInit {
 
   private data;
+  
+  /**
+   * constructor 建構函式
+   */
   constructor(private sampleService: SampleService) { }
+  /**
+   * angular初始化函式
+   */
+  ngOnInit() { }
 
-  ngOnInit() {
-  }
+  /**
+   * 取得userInfo
+   * @param {string} id
+   * @returns {void} 
+   * 
+   */
+  public getUserInfo(id: string) {
 
-  public getData(id: number) {
-    this.sampleService.getData(id).subscribe((res) => {
-      this.data = res;
-    })
+    this.sampleService.getUserInfo(id)
+      .subscribe((res: UserInfo) => {
+        this.data = res;
+      });
   }
 
 }
