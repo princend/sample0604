@@ -8,7 +8,9 @@ export class SampleService {
   constructor(private http:HttpWrapperService) { }
 
   public getData(id:number):Observable<any>{
-    return this.http.get(`http://10.21.11.225/WebApi/AppPortal/appStore/GetAppInfos/${id}`).map((res)=>{
+
+    let url = 'http://10.21.11.225/webapi/sample/userInfo/';
+    return this.http.get(`${url}${id}`).map((res)=>{
       return res.json();
     })
   }
