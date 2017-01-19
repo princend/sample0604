@@ -13,7 +13,7 @@
   "private": true,
   "dependencies": {
     "@cmuh-viewmodel/sample": "git+http://gitserver.adcmuh.org.tw/cmuh.modules.viewmodel/sample.git",
-    "@cmuh/components": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/components",
+    "@cmuh/components": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/components.git",
     "@cmuh/http": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/http.git",
     "@cmuh/scss": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/scss.git"
   },
