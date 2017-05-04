@@ -21,8 +21,8 @@ export class SampleService {
    */
   public getUserInfo(id: string): Observable<UserInfo> {
 
-    let hostname: string = 'http://10.21.11.225/';
-    let path: string = 'webapi/sample/userInfo/';
+    let hostname: string = 'http://test.webapp.adcmuh.org.tw/';
+    let path: string = 'webapi/propertyManager/getBranches';
 
     return this.http
       .get(`${hostname}${path}${id}`)
