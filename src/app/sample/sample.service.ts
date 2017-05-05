@@ -22,7 +22,7 @@ export class SampleService {
   public getUserInfo(id: string): Observable<UserInfo> {
 
     let hostname: string = 'http://test.webapp.adcmuh.org.tw/';
-    let path: string = 'webapi/propertyManager/getBranches';
+    let path: string = 'webapi/drugCheckManager/getEmployee/';
 
     return this.http
       .get(`${hostname}${path}${id}`)
