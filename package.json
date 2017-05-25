@@ -1,6 +1,6 @@
 {
   "name": "@cmuh-view/sample",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -14,6 +14,7 @@
   "dependencies": {
     "@cmuh-viewmodel/sample": "git+http://gitserver.adcmuh.org.tw/cmuh.modules.viewmodel/sample.git",
     "@cmuh/components": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/components.git",
+    "@cmuh/core": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/core.git",
     "@cmuh/http": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/http.git",
     "@cmuh/scss": "git+http://gitserver.adcmuh.org.tw/cmuh.modules/scss.git"
   },
