@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpWrapperService } from '@cmuh/http';
-import { UserInfo } from '@cmuh-viewmodel/sample';
+import { Branch, Department } from '@cmuh-viewmodel/sample';
 
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
@@ -9,24 +9,30 @@ import 'rxjs/Rx';
 @Injectable()
 export class SampleService {
 
+  private hostname: string = 'http://test.his.cmuh.org.tw/webapi/sample/'; 
   /**
    * constructor建構函式
    */
   constructor(private http: HttpWrapperService) { }
 
   /**
-   * 取得userInfo
-   * @param {string} id
-   * @returns {Observable<UserInfo>} 
+   * 取得院區
+   * @returns {Observable<Branch[]>} 
    */
-  public getUserInfo(id: string): Observable<UserInfo> {
-
-    let hostname: string = 'http://test.webapp.adcmuh.org.tw/';
-    let path: string = 'webapi/drugCheckManager/getEmployee/';
-
+  public getBranches(): Observable<Branch[]>{
+    let path: string = 'getBranches';
     return this.http
-      .get(`${hostname}${path}${id}`)
+      .get(`${this.hostname}${path}`)
       .map((res) => {
+        return res.json();
+      });
+  }
+
+  public getDepartments(branchNo: number): Observable<Department[]>{
+    let path: string = 'getDepartNameList/';
+    return this.http
+      .get(`${this.hostname}${path}${branchNo}`)
+      .map(res=>{
         return res.json();
       });
   }

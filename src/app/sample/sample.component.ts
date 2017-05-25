@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserInfo } from '@cmuh-viewmodel/sample';
+import { Branch, Department } from '@cmuh-viewmodel/sample';
 
 import { SampleService } from './sample.service';
 
@@ -11,28 +11,40 @@ import { SampleService } from './sample.service';
 })
 export class SampleComponent implements OnInit {
 
-  private data;
+  private branches: Array<Branch>;
+  private departments: Array<Department>;
+  private branchNo: number;
   
   /**
    * constructor 建構函式
    */
-  constructor(private sampleService: SampleService) { }
+  constructor(private sampleService: SampleService) {
+    this.branchNo = 1;
+  }
   /**
    * angular初始化函式
    */
   ngOnInit() { }
 
   /**
-   * 取得userInfo
-   * @param {string} id
+   * 取得院區
    * @returns {void} 
-   * 
    */
-  public getUserInfo(id: string) {
+  public getBranches() {
+    this.sampleService.getBranches()
+      .subscribe(res=>{
+        this.branches = res;
+      });
+  }
 
-    this.sampleService.getUserInfo(id)
-      .subscribe((res: UserInfo) => {
-        this.data = res;
+  /**
+   * 取得院區下的部門
+   * @returns {void} 
+   */
+  private getDepartments(){
+    this.sampleService.getDepartments(this.branchNo)
+      .subscribe(res=>{
+        this.departments = res;
       });
   }
 

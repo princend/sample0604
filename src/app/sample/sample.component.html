@@ -1,3 +1,6 @@
-<input type="text" #text>
-<button type="button" (click)="getUserInfo(text.value)">GetData</button>
-<pre>{{data|json}}</pre>
+<button (click)="getBranches()">GetBranch</button>
+<pre>{{branches|json}}</pre>
+<hr>
+<input [(ngModel)]="branchNo" type="number">
+<button (click)="getDepartments()">Get Departments</button>
+<pre>{{departments|json}}</pre>
