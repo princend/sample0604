@@ -1,0 +1,21 @@
+.masterDetail {
+    height: 700px;
+    .masterGrid {
+        display: inline-block;
+        height: 100%;
+        vertical-align: top;
+    }
+    .rightDiv {
+        display: inline-block;
+        .content {
+            width: 100%;
+        }
+        .detailGrid {
+            width: 100%;
+        }
+    }
+}
+
+:host /deep/ .ui-datatable tbody>tr.ui-widget-content.ui-state-highlight {
+    color: black;
+}
