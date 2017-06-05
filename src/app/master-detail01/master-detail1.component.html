@@ -20,7 +20,7 @@
 
         <p-column [style]="{ 'width':'50px' }">
             <ng-template let-rowValue="rowData" pTemplate="body">
-                <a class="btn btn-default" icon="fa-refresh" (click)="mtdelete(rowValue)" aria-label="Delete" style="color:red">
+                <a class="btn btn-warning" icon="fa-refresh" (click)="mtdelete(rowValue)" aria-label="Delete" style="color:white">
                     <i class="fa fa-close" aria-hidden="true"></i>
                 </a>
             </ng-template>
@@ -32,6 +32,13 @@
 <!--detail-->
 <div class="right" [style.width]="rightDivWidth" style="overflow:auto;height:700px">
     <p-dataTable [value]="testdtDatas0" scrollable="true" selectionMode="single" (onRowSelect)="onRowSelect($event)" [globalFilter]="gb" #dt>
+        <p-column [style]="{ 'width':'50px' }">
+            <ng-template let-rowValue="rowData" pTemplate="body">
+                <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                </a>
+            </ng-template>
+        </p-column>
         <p-column *ngFor="let column of testdtColumns" field="{{column.field}}" header="{{column.header}}" [style]="{'height':'30px'}"></p-column>
     </p-dataTable>
 </div>
@@ -53,8 +60,8 @@
     </p-footer>
 </p-dialog>
 
-<!--dt彈窗-->
-<p-dialog id="dt" header="dt" [(visible)]="dtdisplayDialog" [responsive]="true" showEffect="fade">
+<!--adddt彈窗-->
+<p-dialog id="dt" header="dt" [(visible)]="dtdisplayDialog" [responsive]="true" showEffect="fade" [modal]="true">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="dt">
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="c1">c1</label></div>
@@ -77,5 +84,36 @@
         </div>
     </p-footer>
 </p-dialog>
+
+
+<!--dt修改彈窗-->
+<p-dialog id="dtch" header="dtmodify" [(visible)]="dtchdisplayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="dt">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="c1">c1</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="c1" style="width:80px" [(ngModel)]="adddt.c1" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="c2">c2</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="c2" style="width:80px" [(ngModel)]="adddt.c2" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="c3">c3</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="c3" style="width:80px" [(ngModel)]="adddt.c3" /></div>
+        </div>
+    </div>
+    <p-footer>
+        <div>
+            <button type="button" class="btn btn-success" (click)="dtmodify()" label="dtmodify">Save</button>
+            <button type="button" class="btn btn-warning" (click)="close()" label="dtClose">Cancel</button>
+
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+
+
+
 
 <!--警告彈窗-->

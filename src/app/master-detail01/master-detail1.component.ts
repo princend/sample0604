@@ -22,13 +22,13 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   ];
   @Input() testdtDatas0: Object[] = [];
   @Input() testdtDatas1: Object[] = 
-  [{ "c1": 1, "c2": 2, "c3": 3 },
-  { "c1": 4, "c2": 5, "c3": 6 },
-   { "c1": 7, "c2": 8, "c3": 9 }]
+  [{ "c1": 1, "c2": 7, "c3": 3 },
+  { "c1": 2, "c2": 5, "c3": 6 },
+   { "c1":3, "c2": 8, "c3": 9 }]
   @Input() testdtDatas2: Object[] =
-   [{ "c1": 11, "c2": 22, "c3": 33 },
-  { "c1": 44, "c2": 55, "c3": 66 }, 
-  { "c1": 77, "c2": 88, "c3": 99 }]
+   [{ "c1": 1, "c2": 22, "c3": 33 },
+  { "c1": 2, "c2": 55, "c3": 66 }, 
+  { "c1":3, "c2": 88, "c3": 99 }]
   @Input() testdtColumns: Object[] = 
   [{ "field": "c1", "header": "c1" },
    { "field": "c2", "header": "c2" }, 
@@ -78,6 +78,9 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   adddt:PrimeDt = new PrimeDt();
   dtdisplayDialog: boolean;
   warningDisplayDialog:boolean;
+  dtchdisplayDialog:boolean;
+
+  dtIndex;
   testshowDialogToAdd() {
     this.newValue = true;
     this.value = new PrimeValue();
@@ -118,6 +121,7 @@ close(){
    this.displayDialog = false;
    this.dtdisplayDialog = false;
    this.warningDisplayDialog=false;
+   this.dtchdisplayDialog=false;
 }
 
 
@@ -132,9 +136,7 @@ close(){
     return this.testmtDatas.indexOf(this.selectedValue);
   }
   selecteddt = new PrimeDt();
-  findSelectedDtIndex(): number {
-    return this.testdtDatas0.indexOf(this.selecteddt);
-  }
+
   ngOnInit() {
     console.log("ngOnInit");
     this.masterWidth = `${this.mtWidth}vw`;
@@ -155,6 +157,11 @@ close(){
     }
   };
 
+  findSelectedDtIndex(): number {
+       console.log(this.testdtDatas0);
+    return this.testdtDatas0.indexOf(this.selecteddt);
+ 
+  }
 
  /*   dtsave() {
         let testdtDatas0 = [...this.testdtDatas0];
@@ -180,15 +187,50 @@ close(){
             }
         }
     this.adddt=new PrimeDt();
-    this.displayDialog = false;
+    this.dtdisplayDialog = false;
   }
   
+  dtmodify(){
+ 
+        if(this.adddt) {
+            this.testdtDatas0[this.dtIndex-1] = this.adddt;
+        }
+    this.adddt=new PrimeDt();
+     this.dtchdisplayDialog = false;
+  }
+
+  
+/*  dtmodify(){
+       let temp  = [...this.testdtDatas0];
+        temp.push(this.adddt)
+        if(temp) {
+            this.testdtDatas0 = [];
+            for(let i = 0; i < temp.length; i++) {            
+                this.testdtDatas0.push(temp[i]);
+            }
+        }
+    this.adddt=new PrimeDt();
+     this.dtchdisplayDialog = false;
+  }*/
 
 
-    dtdelete() {
-    /*      let index=this.findSelectedDtIndex();
-          this.testdtDatas0=this.testdtDatas0.filter((val,i)=>i!=index);
-          this.dt=null;*/
+/*      save() {
+        let cars = [...this.cars];
+        if(this.newCar)
+            cars.push(this.car);
+        else
+            cars[this.findSelectedCarIndex()] = this.car;
+        
+        this.cars = cars;
+        this.car = null;
+        this.displayDialog = false;
+    }*/
+
+
+    dtdelete(rowValue) {
+let index: number = this.testdtDatas0.indexOf(rowValue);
+   this.testdtDatas0 = this.testdtDatas0.filter((val,i) => i!=index);
+          this.value=null;
     this.dtdisplayDialog = false;
   }
 
@@ -208,9 +250,11 @@ close(){
 
 //明細選單一筆
   onRowSelect(event) {
+    console.log(event.data.c1);
+    this.dtIndex=event.data.c1;
     this.newdt = true;
     this.adddt = this.cloneDt(event.data);
-    this.dtdisplayDialog = true;
+    this.dtchdisplayDialog = true;
     this.displayDialog = false;
   }
 
