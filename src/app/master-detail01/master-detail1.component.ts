@@ -147,15 +147,7 @@ close(){
   ngOnChanges() {
     console.log("ngOnChanges");
   }
-//dtdatablechange
-  public dtchange(eventdatavalue) {
-    if (eventdatavalue == 1) {
-      this.testdtDatas0 = this.testdtDatas1;
-    }
-    if (eventdatavalue == 2) {
-      this.testdtDatas0 = this.testdtDatas2;
-    }
-  };
+
 
   findSelectedDtIndex(): number {
        console.log(this.testdtDatas0);
@@ -191,14 +183,28 @@ close(){
   }
   
   dtmodify(){
- 
+ let  testdtDatas0=[...this.testdtDatas0];
         if(this.adddt) {
-            this.testdtDatas0[this.dtIndex-1] = this.adddt;
+            testdtDatas0[this.dtIndex-1] = this.adddt;
         }
+        this.testdtDatas0=testdtDatas0;
     this.adddt=new PrimeDt();
      this.dtchdisplayDialog = false;
   }
 
+
+
+/*    save() {
+        let cars = [...this.cars];
+        if(this.newCar)
+            cars.push(this.car);
+        else
+            cars[this.findSelectedCarIndex()] = this.car;
+        
+        this.cars = cars;
+        this.car = null;
+        this.displayDialog = false;
+    }*/
   
 /*  dtmodify(){
        let temp  = [...this.testdtDatas0];
@@ -227,6 +233,15 @@ close(){
     }*/
 
 
+//dtdatablechange
+  public async dtchange(eventdatavalue) {
+    if (eventdatavalue == 1) {
+      this.testdtDatas0 = this.testdtDatas1;
+    }
+    if (eventdatavalue == 2) {
+      this.testdtDatas0 = this.testdtDatas2;
+    }
+  };
     dtdelete(rowValue) {
 let index: number = this.testdtDatas0.indexOf(rowValue);
    this.testdtDatas0 = this.testdtDatas0.filter((val,i) => i!=index);

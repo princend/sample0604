@@ -31,7 +31,7 @@
 
 <!--detail-->
 <div class="right" [style.width]="rightDivWidth" style="overflow:auto;height:700px">
-    <p-dataTable [value]="testdtDatas0" scrollable="true" selectionMode="single" (onRowSelect)="onRowSelect($event)" [globalFilter]="gb" #dt>
+    <p-dataTable [(value)]="testdtDatas0" scrollable="true" selectionMode="single" (onRowSelect)="onRowSelect($event)" [globalFilter]="gb" #dt>
         <p-column [style]="{ 'width':'50px' }">
             <ng-template let-rowValue="rowData" pTemplate="body">
                 <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">
