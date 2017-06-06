@@ -27,11 +27,7 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   [{ "c1": 1, "c2": 22, "c3": 33 },
   { "c1": 21, "c2": 55, "c3": 66 },
   { "c1": 34, "c2": 88, "c3": 99 }]
-  @Input() testdtColumns: Object[] =
-  [{ "field": "c1", "header": "c1" },
-  { "field": "c2", "header": "c2" },
-  { "field": "c3", "header": "c3" }];
-  ;
+  @Input() testdtColumns: Object[]=[];
   @Input() mtWidth: number = 5;
   @Input() mtSelection: string = "multiple";
   @Input() mtColumns: GridColumn[] = [];
@@ -41,7 +37,7 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   @Input() contentDisplay: boolean = false;
   @Input() contentHeight: number = 30;
   @Input() dtSelection: string = "multiple";
-  @Input() dtColumns: GridColumn[] = [];
+
   @Input() dtDatas: Object[] = [];
   @Input() dtDataKey: string = null;
   @Input() dtShowDeleteBtn: boolean = false;

@@ -42,13 +42,7 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
     private mtColumns:GridColumn[] = [{  "field": "value","editable": false,"header":"value" ,"editorType":"","width":20,"sortable":false,"hidden":false}
     ]
     private mtDatas:Object[]=[{"value":1},{"value":2},{"value":3},{"value":4},{"value":5},{"value":6},{"value":7},{"value":8},{"value":9},{"value":10},{"value":11},{"value":12},{"value":13},{"value":14},{"value":15},{"value":16},{"value":17},{"value":18},{"value":19},{"value":20}];
-    private dtColumns:GridColumn[] = [
-      {  "field": "column1","editable": false,"header":"c1" ,"editorType":"","width":20,"sortable":true,"hidden":false},
-      {  "field": "column2","editable": false,"header":"c2" ,"editorType":"","width":20,"sortable":false,"hidden":false},
-      {  "field": "column3","editable": false,"header":"c3" ,"editorType":"","width":0,"sortable":false,"hidden":true},
-      {  "field": "column4","editable": false,"header":"c4" ,"editorType":"","width":20,"sortable":true,"hidden":false},
-      {  "field": "column5","editable": false,"header":"c5" ,"editorType":"","width":20,"sortable":false,"hidden":false}
-    ]
+
     private dtDatas:Object[]=[];
     private dtDatas1:Object[]=[
       {"column1":"c1r1","column2":"c2r1","column3":"c3r1","column4":"c4r1","column5":true},
@@ -62,6 +56,20 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
       {"column1":"@@@c1r3","column2":"@@@c2r3","column3":"@@@c3r3","column4":"@@@c4r3","column5":false},
       {"column1":"@@@c1r4","column2":"@@@c2r4","column3":"@@@c3r4","column4":"@@@c4r4","column5":true}
     ];
+
+
+//移植到demo
+private testdtColumns: Object[] =
+  [{ "field": "c1", "header": "c1" },
+  { "field": "c2", "header": "c2" },
+  { "field": "c3", "header": "c3" }];
+  ;
+
+
+
+
+
+
     private SelectMt(event) {
         console.log(event);
         if(event.action=="Selected"){
