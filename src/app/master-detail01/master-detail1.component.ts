@@ -36,7 +36,8 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   @Input() dtDataKey: string = null;
   @Input() dtShowDeleteBtn: boolean = false;
 
-
+@Output() mtSelected= new EventEmitter();
+@Output() onDtRowSelect =new EventEmitter<any>();
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
@@ -53,24 +54,15 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   dtdisplayDialog: boolean;
   warningDisplayDialog: boolean;
   dtchdisplayDialog: boolean;
-  testmtshowDialogToAdd() {
-    this.newValue = true;
-    this.value = new PrimeValue();
-    this.displayDialog = true;
-  }
-  testdtshowDialogToAdd() {
-    this.newdt = true;
-    this.adddt = new PrimeDt();
-    this.dtdisplayDialog = true;
-  }
+/*
   showDialogToWarning(rowValue) {
     this.warningDisplayDialog = true;
     this.mtdelete(rowValue);
-  }
+  }*/
   //master新增
-  mtsave() {
-    let temp = this.testmtDatas;
-    temp.push(this.value)
+  mtsave(value) {
+     let temp = this.testmtDatas;
+    temp.push(value)
     if (temp) {
       this.testmtDatas = [];
       for (let i = 0; i < temp.length; i++) {
@@ -101,32 +93,32 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   selecteddt: PrimeDt;
 
   ngOnInit() {
-    console.log("ngOnInit");
+   
     this.masterWidth = `${this.mtWidth}vw`;
     this.rightDivWidth = `${100 - this.mtWidth - 5}vw`;
     this.contentDivHeight = `${this.contentHeight}vh`;
     this.detailHeight = `${100 - this.contentHeight - 5}vh`;
   }
   ngOnChanges() {
-    console.log("ngOnChanges");
+    
   }
   //dt找到項位
   findSelectedDtIndex(): number {
+    //console.log(this.selecteddt);
+    console.log(this.testdtDatas);
     return this.testdtDatas.indexOf(this.selecteddt);
   }
   //dt新增
-  dtsave() {
+  dtsave(adddt) {
     let temp = [...this.testdtDatas];
-    temp.push(this.adddt)
-    console.log(this.adddt.c1);
+    temp.push(adddt)
     if (temp) {
       this.testdtDatas = [];
       for (let i = 0; i < temp.length; i++) {
         this.testdtDatas.push(temp[i]);
       }
     }
-    this.adddt = new PrimeDt();
-    this.dtdisplayDialog = false;
+
     if (this.mtIndexValue == 1) {
       this.testdtDatas1 = temp;
     }
@@ -136,12 +128,14 @@ export class MasterDetailComponent implements OnInit, OnChanges {
  this.toastr.success('新增成功!', 'Success!');
   }
   //dt修改
-  dtmodify() {
+  dtmodify(dt) {
+
     let temp = [...this.testdtDatas];
-    temp[this.findSelectedDtIndex()] = this.adddt;
+ //console.log(temp);
+    temp[this.findSelectedDtIndex()] = dt;
     this.testdtDatas = temp;
-    this.adddt = new PrimeDt();
-    this.dtchdisplayDialog = false;
+    dt = new PrimeDt();
+
 
     if (this.mtIndexValue == 1) {
       this.testdtDatas1 = temp;
@@ -150,7 +144,28 @@ export class MasterDetailComponent implements OnInit, OnChanges {
       this.testdtDatas2 = temp;
     }
      this.toastr.success('修改成功!', 'Success!');
+     return this.testdtDatas;
   }
+
+/*  dtmodify(dt) {
+
+    let temp = [...this.testdtDatas];
+ 
+    temp[this.findSelectedDtIndex()] = dt;
+    this.testdtDatas = temp;
+    dt = new PrimeDt();
+
+
+    if (this.mtIndexValue == 1) {
+      this.testdtDatas1 = temp;
+    }
+    else if (this.mtIndexValue == 2) {
+      this.testdtDatas2 = temp;
+    }
+     this.toastr.success('修改成功!', 'Success!');
+     return this.testdtDatas;
+  }*/
+
   //dtdatablechange
   public async dtchange(eventdatavalue) {
 
@@ -182,17 +197,18 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   //主檔選單一筆
 
  @Input() mtIndexValue;
-  public handleMtRowSelected(event) {
+  public onMtRowSelected(event) {
+    console.log("子組件有動作");
     this.mtIndexValue = event.data.value;
     this.dtchange(event.data.value);
   }
-  //明細選單一筆
-  onRowSelect(event) {
-    this.newdt = true;
+  //明細連點選單一筆
+  DtRowSelect(event) {
     this.adddt = this.cloneDt(event.data);
-    this.dtchdisplayDialog = true;
-    this.displayDialog = false;
+     this.onDtRowSelect.emit(this.adddt);
   }
+
+
 
   cloneDt(c) {
     let dt = new PrimeDt();
@@ -201,9 +217,7 @@ export class MasterDetailComponent implements OnInit, OnChanges {
     }
     return dt;
   }
-  update(dt) {
-    dt.reset();
-  }
+
 }
 
 export class PrimeValue {

@@ -1,12 +1,5 @@
 <!--新增按鈕-->
 
-<cmuh-toolbar>
-    <div>
-        <button class="btn btn-default" type="button" (click)="testmtshowDialogToAdd()" label="Add">AddMt</button>
-        <button class="btn btn-default" type="button" (click)="testdtshowDialogToAdd()" label="Adddt">AddDt</button>
-    </div>
-</cmuh-toolbar>
-
 <!--search-->
 <div style="text-align:right">
     <input #gb type="text" pInputText size="30" placeholder="請輸入查詢條件">
@@ -15,7 +8,7 @@
 
 <!--master-->
 <div class="left" [style.width]="masterWidth" style="overflow:auto;height:700px">
-    <p-dataTable [value]="testmtDatas" scrollable="true" [(selection)]="selectedValue" (onRowSelect)="handleMtRowSelected($event)" selectionMode="multiple" [globalFilter]="gb">
+    <p-dataTable [value]="testmtDatas" scrollable="true" [(selection)]="selectedValue" (onRowSelect)="onMtRowSelected($event)" selectionMode="multiple" [globalFilter]="gb">
 
 
         <p-column [style]="{ 'width':'50px' }">
@@ -32,7 +25,7 @@
 
 <!--detail-->
 <div class="right" [style.width]="rightDivWidth" style="overflow:auto;height:700px">
-    <p-dataTable [(value)]="testdtDatas" scrollable="true" [(selection)]="selecteddt" selectionMode="multiple" (onRowDblclick)="onRowSelect($event)" [globalFilter]="gb" #dt>
+    <p-dataTable [(value)]="testdtDatas" scrollable="true" [(selection)]="selecteddt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>
         <p-column [style]="{ 'width':'50px' }">
             <ng-template let-rowValue="rowData" pTemplate="body">
                 <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">
@@ -40,6 +33,8 @@
                 </a>
             </ng-template>
         </p-column>
+
+
         <p-column *ngFor="let column of testdtColumns" field="{{column.field}}" header="{{column.header}}" [style]="{'height':'30px'}" [sortable]="true">
 
         </p-column>
@@ -47,51 +42,9 @@
     </p-dataTable>
 </div>
 
-<!--mt彈窗-->
-<p-dialog id="mt" header="新增master" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="value">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="value">value</label></div>
-            <div class="ui-grid-col-8"><input type="text" style="width:80px" id="value" [(ngModel)]="value.value" /></div>
-        </div>
-    </div>
-    <p-footer>
-        <div>
-            <button type="button" class="btn btn-success" (click)="mtsave()" label="mtSave">Save</button>
-            <button type="button" class="btn btn-warning" (click)="close()" label="mtClose">Cancel</button>
-
-        </div>
-    </p-footer>
-</p-dialog>
-
-<!--adddt彈窗-->
-<p-dialog id="dt" header="新增Detail" [(visible)]="dtdisplayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="dt">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="c1">c1</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="c1" style="width:80px" [(ngModel)]="adddt.c1" /></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="c2">c2</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="c2" style="width:80px" [(ngModel)]="adddt.c2" /></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="c3">c3</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="c3" style="width:80px" [(ngModel)]="adddt.c3" /></div>
-        </div>
-    </div>
-    <p-footer>
-        <div>
-            <button type="button" class="btn btn-success" (click)="dtsave()" label="dtSave">Save</button>
-            <button type="button" class="btn btn-warning" (click)="close()" label="dtClose">Cancel</button>
-
-        </div>
-    </p-footer>
-</p-dialog>
-
 
 <!--dt修改彈窗-->
-<p-dialog id="dtch" header="dtmodify" [(visible)]="dtchdisplayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+<!--<p-dialog id="dtch" header="dtmodify" [(visible)]="dtchdisplayDialog" [responsive]="true" showEffect="fade" [modal]="true">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="dt">
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="c1">c1</label></div>
@@ -113,11 +66,6 @@
 
         </div>
     </p-footer>
-</p-dialog>
-
-
-
-
-
+</p-dialog>-->
 
 <!--警告彈窗-->

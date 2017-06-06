@@ -1,8 +1,96 @@
 <div>
     <div class="panel-heading">元件</div>
+
+
+    <!--新增按鈕-->
+
+    <cmuh-toolbar>
+        <div>
+            <button class="btn btn-default" type="button" (click)="testmtshowDialogToAdd()" label="Add">AddMt</button>
+            <button class="btn btn-default" type="button" (click)="testdtshowDialogToAdd()" label="Adddt">AddDt</button>
+        </div>
+    </cmuh-toolbar>
+
+    <!--子組件mt-->
     <div class="panel-body">
-        <cmuh-master-detail #md [mtWidth]="mtWidth" [mtColumns]="mtColumns" [(testmtDatas)]="testmtDatas" [mtSelection]="mtSelection" (mtSelectedevent)="SelectMt($event)" (mtDatasChange)="dtDatasChange($event)" [contentDisplay]="contentDisplay" [contentHeight]="contentHeight"
-            [testdtColumns]="testdtColumns" [(testdtDatas)]="testdtDatas" [dtDataKey]="column1" [dtShowDeleteBtn]="dtShowDeleteBtn" [dtSelection]="dtSelection" (dtSelectedevent)="SelectDt($event)" (dtDatasChange)="dtDatasChange($event)">
+        <cmuh-master-detail #md [mtWidth]="mtWidth" [mtColumns]="mtColumns" [(testmtDatas)]="testmtDatas" (onDtRowSelect)="DtRowSelect($event)" (onMtRowSelected)="handleMtRowSelected($event)" (mtSelectedevent)="SelectMt($event)" (mtDatasChange)="dtDatasChange($event)"
+            [contentDisplay]="contentDisplay" [contentHeight]="contentHeight" [testdtColumns]="testdtColumns" [(testdtDatas)]="testdtDatas" [dtDataKey]="column1" [dtShowDeleteBtn]="dtShowDeleteBtn" [dtSelection]="dtSelection" (dtSelectedevent)="SelectDt($event)"
+            (dtDatasChange)="dtDatasChange($event)">
         </cmuh-master-detail>
     </div>
+
+
+
 </div>
+
+
+
+
+
+<!--mt彈窗-->
+<p-dialog id="mt" header="新增master" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="addmt">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="addmt">value</label></div>
+            <div class="ui-grid-col-8"><input type="text" style="width:80px" id="value" [(ngModel)]="addmt.value" /></div>
+        </div>
+    </div>
+    <p-footer>
+        <div>
+            <button type="button" class="btn btn-success" (click)="mtsave()" label="mtSave">Save</button>
+            <button type="button" class="btn btn-warning" (click)="close()" label="mtClose">Cancel</button>
+
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+<!--adddt彈窗-->
+<p-dialog id="dt" header="新增Detail" [(visible)]="dtdisplayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="adddt">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="c1">c1</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="c1" style="width:80px" [(ngModel)]="adddt.c1" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="c2">c2</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="c2" style="width:80px" [(ngModel)]="adddt.c2" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="c3">c3</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="c3" style="width:80px" [(ngModel)]="adddt.c3" /></div>
+        </div>
+    </div>
+    <p-footer>
+        <div>
+            <button type="button" class="btn btn-success" (click)="dtsave()" label="dtSave">Save</button>
+            <button type="button" class="btn btn-warning" (click)="close()" label="dtClose">Cancel</button>
+
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+<!--dt修改彈窗-->
+<p-dialog id="dtch" header="dtmodify" [(visible)]="dtchdisplayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="adddt">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="c1">c1</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="c1" style="width:80px" [(ngModel)]="adddt.c1" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="c2">c2</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="c2" style="width:80px" [(ngModel)]="adddt.c2" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="c3">c3</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="c3" style="width:80px" [(ngModel)]="adddt.c3" /></div>
+        </div>
+    </div>
+    <p-footer>
+        <div>
+            <button type="button" class="btn btn-success" (click)="dtmodify()" label="dtmodify">Save</button>
+            <button type="button" class="btn btn-warning" (click)="close()" label="dtClose">Cancel</button>
+        </div>
+    </p-footer>
+</p-dialog>

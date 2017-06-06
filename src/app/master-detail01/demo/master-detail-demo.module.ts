@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 //import {DialogModule} from 'primeng/primeng';
 
-import { DialogModule } from '@cmuh/components/src/app/dialog';
+import { DialogModule } from 'primeng/primeng';
 import { MasterDetailModule } from '../master-detail.module';
 import { MasterDetailDemoComponent } from './master-detail-demo.component';
 import {ToolbarModule} from '@cmuh/components/src/app/search-toolbar/toolbar';

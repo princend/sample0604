@@ -1,6 +1,6 @@
+
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {GridColumn} from '../models';
-import {DialogModule} from 'primeng/primeng';
 import { MasterDetailComponent } from "../master-detail1.component";
 @Component({
      selector: 'cmuh-master-detail-demo',
@@ -15,14 +15,8 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
 
 
         ngOnInit() { }
-    private onSearch(searchString: string) {
-        /* do something... */
-        console.log(searchString);
-        alert(`送出查詢${searchString}`);
-    }
-
     ngAfterViewInit(){
-        console.log("parent ngAfterViewInit");
+   
         
     }
     private displayMt = false;
@@ -36,7 +30,7 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
     private mtWidth:number=25;
     private dtWidh:number=25;
     private contentHeight:number=20;
-    private mtSelection:string="multiple";
+   
     private dtSelection:string="multiple";
     private contentDisplay:boolean=true;
     private dtShowDeleteBtn:boolean=true;
@@ -59,6 +53,18 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
 
 
 //移植到demo
+
+
+
+  displayDialog: boolean;
+  dtdisplayDialog: boolean;
+  warningDisplayDialog: boolean;
+  dtchdisplayDialog: boolean;
+  newMt:boolean;
+  newDt:boolean;
+  addmt: Mt = new Mt();
+  adddt:Dt=new Dt();
+  private mtIndexValue;
 private testdtColumns: Object[] =
   [{ "field": "c1", "header": "c1" },
   { "field": "c2", "header": "c2" },
@@ -83,8 +89,91 @@ private testdtDatas: Object[] = [];
   { "c1": 21, "c2": 55, "c3": 66 },
   { "c1": 34, "c2": 88, "c3": 99 }]
 
+
+
+  testmtshowDialogToAdd() {
+    this.newMt = true;
+    this.addmt = new Mt();
+    this.displayDialog = true;
+  }
+
+  testdtshowDialogToAdd(){
+    
+    this.newDt = true;
+    this.adddt = new Dt();
+    this.dtdisplayDialog = true;
+  
+  }
+
+
+  public async dtchange(eventDataValue) {
+this.masterDetail.dtchange(eventDataValue);
+    };
+  
+mtsave(){
+    this.masterDetail.mtsave(this.addmt);
+    this.displayDialog=false;
+}
+
+close(){
+ this.displayDialog=false;
+  this.dtdisplayDialog=false;
+  this.warningDisplayDialog=false;
+  this.dtchdisplayDialog=false;
+}
+
+
+
+dtsave(){
+     this.masterDetail.dtsave(this.adddt);
+    this.dtdisplayDialog=false;
+}
+
+
+
+  public handleMtRowSelected(event) {
+    this.mtIndexValue = event.data.value;
+    this.dtchange(event.data.value);
+  }
+
+
+DtRowSelect(event){
+    this.dtchdisplayDialog=true;
+     this.adddt = event;
+}
+
+
+
+
+dtmodify(){
+
+      // this.masterDetail.findSelectedDtIndex();
+    this.masterDetail.dtmodify(this.adddt);
+   
+     this.dtchdisplayDialog=false;
+  
+}
+/*  dtmodify() {
+    let temp = [...this.testdtDatas];
+    temp[this.findSelectedDtIndex()] = this.adddt;
+    this.testdtDatas = temp;
+    this.adddt = new PrimeDt();
+    this.dtchdisplayDialog = false;
+
+    if (this.mtIndexValue == 1) {
+      this.testdtDatas1 = temp;
+    }
+    else if (this.mtIndexValue == 2) {
+      this.testdtDatas2 = temp;
+    }
+     this.toastr.success('修改成功!', 'Success!');
+  }*/
+
+
+
+//結束
     private SelectMt(event) {
-        console.log(event);
+       
         if(event.action=="Selected"){
             //這邊因為是示範資料，實際上應該以選取的主檔為參數，從service帶出明細資料
             this.mtSelectedRow= event.selectedRow;
@@ -94,11 +183,12 @@ private testdtDatas: Object[] = [];
         
     }
     private SelectDt(event) {
-        console.log(event);
+   
         this.dtSelectedRows =event.selectedRows;
     }
     private dtDatasChange(event){   
-        console.log(event);
+       
+       
     }
 
     private addDt(){
@@ -119,12 +209,7 @@ private testdtDatas: Object[] = [];
         this.displayDt=false;
         this.addDetail=new Detail();
     }
-    private showMtAdd() {
-        this.displayMt = true;
-    }
-    private showDtAdd() {
-        this.displayDt = true;
-    }
+
 
 
 }
@@ -138,5 +223,13 @@ class Detail {
 
 export class Mt {
   public value;
+  constructor() { }
+}
+
+
+export class Dt{
+      public c1;
+  public c2;
+  public c3;
   constructor() { }
 }
