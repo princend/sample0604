@@ -53,10 +53,8 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   @Output() mtSelectedevent = new EventEmitter();
   @Output() dtSelectedevent = new EventEmitter();
 
-  private mtSelected: Object[] = [];
-  private dtSelected: Object[] = [];
-  private mtDataToRender: Object[];
-  private dtDataToRender: Object[];
+
+
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
@@ -109,12 +107,41 @@ showDialogToWarning(rowValue){
         }
     this.displayDialog = false;
   }
+
+
+/*
+  mtsave() {
+        let temp  = this.testmtDatas;
+        temp.push(this.value)
+        if(temp) {
+            this.testmtDatas = [];
+            for(let i = 0; i < temp.length; i++) {            
+                this.testmtDatas.push(temp[i]);
+            }
+        }
+    this.displayDialog = false;
+  }*/
+
+
+
+
   mtdelete(rowValue) {
 let index: number = this.testmtDatas.indexOf(rowValue);
    this.testmtDatas = this.testmtDatas.filter((val,i) => i!=index);
           this.value=null;
    
   }
+
+
+/*  mtdelete(rowValue) {
+let index: number = this.testmtDatas.indexOf(rowValue);
+   this.testmtDatas = this.testmtDatas.filter((val,i) => i!=index);
+          this.value=null;
+   
+  }
+*/
+
+
 
 //關閉彈窗
 close(){
@@ -131,11 +158,13 @@ close(){
 
 
 
-
+//mt找項位
   findSelectedValueIndex(): number {
+
+    console.log(this.testmtDatas.indexOf(this.selectedValue));
     return this.testmtDatas.indexOf(this.selectedValue);
   }
-  selecteddt = new PrimeDt();
+  selecteddt :PrimeDt;
 
   ngOnInit() {
     console.log("ngOnInit");
@@ -148,28 +177,17 @@ close(){
     console.log("ngOnChanges");
   }
 
-
+//dt找到項位
   findSelectedDtIndex(): number {
-       console.log(this.testdtDatas0);
+       console.log(this.testdtDatas0.indexOf(this.selecteddt));
     return this.testdtDatas0.indexOf(this.selecteddt);
  
   }
 
- /*   dtsave() {
-        let testdtDatas0 = [...this.testdtDatas0];
-        if (this.newdt) {
-          testdtDatas0.push(this.testdtDatas0);
-        }
-            else
-          testdtDatas0[this.findSelectedDtIndex()] = this.dt;
-        this.testdtDatas0 = testdtDatas0;
-        this.dt = null;
-    this.dtdisplayDialog = false;
-  }*/
 
+//dt新增
   dtsave() {
         let temp  = [...this.testdtDatas0];
-        //console.log(this.testdtDatas1);
         temp.push(this.adddt)
         console.log(this.adddt.c1);
         if(temp) {
@@ -182,55 +200,20 @@ close(){
     this.dtdisplayDialog = false;
   }
   
+
+
+
+//dt修改
   dtmodify(){
- let  testdtDatas0=[...this.testdtDatas0];
-        if(this.adddt) {
-            testdtDatas0[this.dtIndex-1] = this.adddt;
-        }
-        this.testdtDatas0=testdtDatas0;
+        let temp  = [...this.testdtDatas0];
+temp[this.findSelectedDtIndex()]=this.adddt;
+this.testdtDatas0=temp;
     this.adddt=new PrimeDt();
-     this.dtchdisplayDialog = false;
+    this.dtchdisplayDialog = false;
   }
 
 
 
-/*    save() {
-        let cars = [...this.cars];
-        if(this.newCar)
-            cars.push(this.car);
-        else
-            cars[this.findSelectedCarIndex()] = this.car;
-        
-        this.cars = cars;
-        this.car = null;
-        this.displayDialog = false;
-    }*/
-  
-/*  dtmodify(){
-       let temp  = [...this.testdtDatas0];
-        temp.push(this.adddt)
-        if(temp) {
-            this.testdtDatas0 = [];
-            for(let i = 0; i < temp.length; i++) {            
-                this.testdtDatas0.push(temp[i]);
-            }
-        }
-    this.adddt=new PrimeDt();
-     this.dtchdisplayDialog = false;
-  }*/
-
-
-/*      save() {
-        let cars = [...this.cars];
-        if(this.newCar)
-            cars.push(this.car);
-        else
-            cars[this.findSelectedCarIndex()] = this.car;
-        
-        this.cars = cars;
-        this.car = null;
-        this.displayDialog = false;
-    }*/
 
 
 //dtdatablechange
@@ -242,6 +225,8 @@ close(){
       this.testdtDatas0 = this.testdtDatas2;
     }
   };
+
+//dt刪除
     dtdelete(rowValue) {
 let index: number = this.testdtDatas0.indexOf(rowValue);
    this.testdtDatas0 = this.testdtDatas0.filter((val,i) => i!=index);
@@ -249,23 +234,19 @@ let index: number = this.testdtDatas0.indexOf(rowValue);
     this.dtdisplayDialog = false;
   }
 
+//主檔選單一筆
+  indexValue;
 
-/*    save() {
-        let cars = [...this.cars];
-        if(this.newCar)
-            cars.push(this.car);
-        else
-            cars[this.findSelectedCarIndex()] = this.car;
-        
-        this.cars = cars;
-        this.car = null;
-        this.displayDialog = false;
-    }
-*/
+  public handleMtRowSelected(event) {
+    console.log(this.selectedValue);
+    this.dtchange(event.data.value);
+    this.indexValue=event.data.value;
+  }
 
-//明細選單一筆
+
+  //明細選單一筆
   onRowSelect(event) {
-    console.log(event.data.c1);
+    
     this.dtIndex=event.data.c1;
     this.newdt = true;
     this.adddt = this.cloneDt(event.data);
@@ -281,14 +262,6 @@ let index: number = this.testdtDatas0.indexOf(rowValue);
     return dt;
   }
 
-  indexValue;
-
-  public handleMtRowSelected(event) {//主檔選單一筆
-    //console.log(event.data.value);
-
-    this.dtchange(event.data.value);
-    this.indexValue=event.data.value;
-  }
 
   update(dt) {
     dt.reset();
