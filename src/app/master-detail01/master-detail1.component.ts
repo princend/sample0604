@@ -36,7 +36,7 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   @Input() dtDataKey: string = null;
   @Input() dtShowDeleteBtn: boolean = false;
 
-@Output() mtSelected= new EventEmitter();
+
 @Output() onDtRowSelect =new EventEmitter<any>();
   private masterWidth: string = "";
   private rightDivWidth: string = "";

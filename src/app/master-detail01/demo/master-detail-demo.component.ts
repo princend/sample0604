@@ -21,8 +21,7 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
     }
     private displayMt = false;
     private displayDt = false;
-    private addMaster = new Master();
-    private addDetail = new Detail();
+  
     private mtSelectedRows:Object[]=[];
     private dtSelectedRows:Object[]=[];
 
@@ -37,19 +36,7 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
 
     private mtColumns:GridColumn[] = [{  "field": "value","editable": false,"header":"value" ,"editorType":"","width":20,"sortable":false,"hidden":false}
     ]
-    private dtDatas:Object[]=[];
-    private dtDatas1:Object[]=[
-      {"column1":"c1r1","column2":"c2r1","column3":"c3r1","column4":"c4r1","column5":true},
-      {"column1":"c1r2","column2":"c2r2","column3":"c3r2","column4":"c4r2","column5":false},
-      {"column1":"c1r3","column2":"c2r3","column3":"c3r3","column4":"c4r3","column5":true},
-      {"column1":"c1r4","column2":"c2r4","column3":"c3r4","column4":"c4r4","column5":false}
-    ];
-    private dtDatas2:Object[]=[
-      {"column1":"@@@c1r1","column2":"@@@c2r1","column3":"@@@c3r1","column4":"@@@c4r1","column5":false},
-      {"column1":"@@@c1r2","column2":"@@@c2r2","column3":"@@@c3r2","column4":"@@@c4r2","column5":true},
-      {"column1":"@@@c1r3","column2":"@@@c2r3","column3":"@@@c3r3","column4":"@@@c4r3","column5":false},
-      {"column1":"@@@c1r4","column2":"@@@c2r4","column3":"@@@c3r4","column4":"@@@c4r4","column5":true}
-    ];
+
 
 
 //移植到demo
@@ -146,7 +133,7 @@ DtRowSelect(event){
 
 
 dtmodify(){
-
+console.log("sss"+this.testdtDatas);
       // this.masterDetail.findSelectedDtIndex();
     this.masterDetail.dtmodify(this.adddt);
    
@@ -172,53 +159,13 @@ dtmodify(){
 
 
 //結束
-    private SelectMt(event) {
-       
-        if(event.action=="Selected"){
-            //這邊因為是示範資料，實際上應該以選取的主檔為參數，從service帶出明細資料
-            this.mtSelectedRow= event.selectedRow;
-        this.dtDatas= event.selectedRow.value==1?this.dtDatas1:event.selectedRow.value==2?this.dtDatas2:[];
-        }
-        this.mtSelectedRows =event.selectedRows;
-        
-    }
-    private SelectDt(event) {
-   
-        this.dtSelectedRows =event.selectedRows;
-    }
-    private dtDatasChange(event){   
-       
-       
-    }
 
-    private addDt(){
-        if(this.mtSelectedRow=={})
-        {
-            return;
-        }
-        else{
-            let temp = this.dtDatas;
-            temp.push(this.addDetail)
-            if(temp) {
-                this.dtDatas = [];
-                for(let i = 0; i < temp.length; i++) {            
-                    this.dtDatas.push(temp[i]);
-                }
-            }
-        }
-        this.displayDt=false;
-        this.addDetail=new Detail();
-    }
+
 
 
 
 }
-class Master  {
-    constructor(public text?, public value?) {}
-}
-class Detail {
-     constructor(public column1?, public column2?,column3?,column4?,column5?:boolean) {}
-}
+
 
 
 export class Mt {
