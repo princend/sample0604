@@ -1,13 +1,16 @@
-import { Component, OnInit,AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {GridColumn} from '../models';
 import {DialogModule} from 'primeng/primeng';
-
+import { MasterDetailComponent } from "../master-detail1.component";
 @Component({
      selector: 'cmuh-master-detail-demo',
     templateUrl: 'master-detail-demo.component.html'
 })
 
 export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
+
+
+    @ViewChild('md') masterDetail: MasterDetailComponent;
     constructor() { }
 
 
@@ -36,13 +39,10 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
     private mtSelection:string="multiple";
     private dtSelection:string="multiple";
     private contentDisplay:boolean=true;
-    private mtShowDeleteBtn:boolean=true;
     private dtShowDeleteBtn:boolean=true;
 
     private mtColumns:GridColumn[] = [{  "field": "value","editable": false,"header":"value" ,"editorType":"","width":20,"sortable":false,"hidden":false}
     ]
-    private mtDatas:Object[]=[{"value":1},{"value":2},{"value":3},{"value":4},{"value":5},{"value":6},{"value":7},{"value":8},{"value":9},{"value":10},{"value":11},{"value":12},{"value":13},{"value":14},{"value":15},{"value":16},{"value":17},{"value":18},{"value":19},{"value":20}];
-
     private dtDatas:Object[]=[];
     private dtDatas1:Object[]=[
       {"column1":"c1r1","column2":"c2r1","column3":"c3r1","column4":"c4r1","column5":true},
@@ -65,10 +65,23 @@ private testdtColumns: Object[] =
   { "field": "c3", "header": "c3" }];
   ;
 
+  private testmtDatas: Mt[] = [
+    { "value": 1 },
+    { "value": 2 }
+  ];
+
+private testdtDatas: Object[] = [];
+
+  private testdtDatas1: Object[] =
+  [{ "c1": 1, "c2": 7, "c3": 3 },
+  { "c1": 2, "c2": 5, "c3": 6 },
+  { "c1": 3, "c2": 8, "c3": 9 }];
 
 
-
-
+  private testdtDatas2: Object[] =
+  [{ "c1": 1, "c2": 22, "c3": 33 },
+  { "c1": 21, "c2": 55, "c3": 66 },
+  { "c1": 34, "c2": 88, "c3": 99 }]
 
     private SelectMt(event) {
         console.log(event);
@@ -87,19 +100,7 @@ private testdtColumns: Object[] =
     private dtDatasChange(event){   
         console.log(event);
     }
-    private addMt(){
-        let temp  = this.mtDatas;
-        temp.push(this.addMaster)
-        if(temp) {
-            this.mtDatas = [];
-            for(let i = 0; i < temp.length; i++) {            
-                this.mtDatas.push(temp[i]);
-            }
-            console.log(this.mtDatas);
-        }
-        this.displayMt=false;
-        this.addMaster=new Master();
-    }
+
     private addDt(){
         if(this.mtSelectedRow=={})
         {
@@ -132,4 +133,10 @@ class Master  {
 }
 class Detail {
      constructor(public column1?, public column2?,column3?,column4?,column5?:boolean) {}
+}
+
+
+export class Mt {
+  public value;
+  constructor() { }
 }

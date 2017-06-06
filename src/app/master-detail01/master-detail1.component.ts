@@ -14,15 +14,10 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   constructor(public toastr: ToastsManager, private vRef: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vRef);
   }
-  private testmtDatas: PrimeValue[] = [
-    { "value": 1 },
-    { "value": 2 }
-  ];
-  @Input() testdtDatas0: Object[] = [];
+  @Input() testmtDatas: PrimeValue[] = [];
+  @Input() testdtDatas: Object[] = [];
   @Input() testdtDatas1: Object[] =
-  [{ "c1": 1, "c2": 7, "c3": 3 },
-  { "c1": 2, "c2": 5, "c3": 6 },
-  { "c1": 3, "c2": 8, "c3": 9 }]
+  []
   @Input() testdtDatas2: Object[] =
   [{ "c1": 1, "c2": 22, "c3": 33 },
   { "c1": 21, "c2": 55, "c3": 66 },
@@ -33,7 +28,6 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   @Input() mtColumns: GridColumn[] = [];
   @Input() mtDatas: Object[] = [];
   @Input() mtDataKey: string = null;
-  @Input() mtShowDeleteBtn: boolean = false;
   @Input() contentDisplay: boolean = false;
   @Input() contentHeight: number = 30;
   @Input() dtSelection: string = "multiple";
@@ -118,17 +112,17 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   }
   //dt找到項位
   findSelectedDtIndex(): number {
-    return this.testdtDatas0.indexOf(this.selecteddt);
+    return this.testdtDatas.indexOf(this.selecteddt);
   }
   //dt新增
   dtsave() {
-    let temp = [...this.testdtDatas0];
+    let temp = [...this.testdtDatas];
     temp.push(this.adddt)
     console.log(this.adddt.c1);
     if (temp) {
-      this.testdtDatas0 = [];
+      this.testdtDatas = [];
       for (let i = 0; i < temp.length; i++) {
-        this.testdtDatas0.push(temp[i]);
+        this.testdtDatas.push(temp[i]);
       }
     }
     this.adddt = new PrimeDt();
@@ -143,9 +137,9 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   }
   //dt修改
   dtmodify() {
-    let temp = [...this.testdtDatas0];
+    let temp = [...this.testdtDatas];
     temp[this.findSelectedDtIndex()] = this.adddt;
-    this.testdtDatas0 = temp;
+    this.testdtDatas = temp;
     this.adddt = new PrimeDt();
     this.dtchdisplayDialog = false;
 
@@ -161,33 +155,33 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   public async dtchange(eventdatavalue) {
 
     if (eventdatavalue == this.testmtDatas[0].value) {
-      this.testdtDatas0 = this.testdtDatas1;
+      this.testdtDatas = this.testdtDatas1;
     }
     else if (eventdatavalue == this.testmtDatas[1].value) {
-      this.testdtDatas0 = this.testdtDatas2;
+      this.testdtDatas = this.testdtDatas2;
     }
     else {
-      this.testdtDatas0 = [];
+      this.testdtDatas = [];
     }
   };
   //dt刪除
   dtdelete(rowValue) {
-    let index: number = this.testdtDatas0.indexOf(rowValue);
-    this.testdtDatas0 = this.testdtDatas0.filter((val, i) => i != index);
+    let index: number = this.testdtDatas.indexOf(rowValue);
+    this.testdtDatas = this.testdtDatas.filter((val, i) => i != index);
     this.value = null;
     this.dtdisplayDialog = false;
         if (this.mtIndexValue == 1) {
-      this.testdtDatas1 = this.testdtDatas0;
+      this.testdtDatas1 = this.testdtDatas;
     }
     else if (this.mtIndexValue == 2) {
-      this.testdtDatas2 = this.testdtDatas0;
+      this.testdtDatas2 = this.testdtDatas;
     }
     this.toastr.warning('刪除成功', 'Success!');
   }
 
   //主檔選單一筆
 
-  mtIndexValue;
+ @Input() mtIndexValue;
   public handleMtRowSelected(event) {
     this.mtIndexValue = event.data.value;
     this.dtchange(event.data.value);

@@ -1,8 +1,8 @@
 <div>
     <div class="panel-heading">元件</div>
     <div class="panel-body">
-        <cmuh-master-detail [mtWidth]="mtWidth" [mtColumns]="mtColumns" [(mtDatas)]="mtDatas" [mtShowDeleteBtn]="mtShowDeleteBtn" [mtSelection]="mtSelection" (mtSelectedevent)="SelectMt($event)" (mtDatasChange)="dtDatasChange($event)" [contentDisplay]="contentDisplay"
-            [contentHeight]="contentHeight" [testdtColumns]="testdtColumns" [(dtDatas)]="dtDatas" [dtDataKey]="column1" [dtShowDeleteBtn]="dtShowDeleteBtn" [dtSelection]="dtSelection" (dtSelectedevent)="SelectDt($event)" (dtDatasChange)="dtDatasChange($event)">
+        <cmuh-master-detail #md [mtWidth]="mtWidth" [mtColumns]="mtColumns" [(testmtDatas)]="testmtDatas" [mtSelection]="mtSelection" (mtSelectedevent)="SelectMt($event)" (mtDatasChange)="dtDatasChange($event)" [contentDisplay]="contentDisplay" [contentHeight]="contentHeight"
+            [testdtColumns]="testdtColumns" [(testdtDatas)]="testdtDatas" [dtDataKey]="column1" [dtShowDeleteBtn]="dtShowDeleteBtn" [dtSelection]="dtSelection" (dtSelectedevent)="SelectDt($event)" (dtDatasChange)="dtDatasChange($event)">
         </cmuh-master-detail>
     </div>
 </div>
