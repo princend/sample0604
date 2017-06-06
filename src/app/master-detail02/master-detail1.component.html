@@ -43,7 +43,7 @@
         <p-column *ngFor="let column of testdtColumns" field="{{column.field}}" header="{{column.header}}" [style]="{'height':'30px'}" [sortable]="true">
 
         </p-column>
-
+        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
     </p-dataTable>
 </div>
 
