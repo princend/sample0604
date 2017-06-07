@@ -34,11 +34,6 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
     private contentDisplay:boolean=true;
     private dtShowDeleteBtn:boolean=true;
 
-    private mtColumns:GridColumn[] = [{  "field": "value","editable": false,"header":"value" ,"editorType":"","width":20,"sortable":false,"hidden":false}
-    ]
-
-
-
 //移植到demo
 
 
@@ -65,16 +60,19 @@ private testdtColumns: Object[] =
 
 private testdtDatas: Object[] = [];
 
-  private testdtDatas1: Object[] =
+ public  testdtDatas1: Object[] =
   [{ "c1": 1, "c2": 7, "c3": 3 },
   { "c1": 2, "c2": 5, "c3": 6 },
   { "c1": 3, "c2": 8, "c3": 9 }];
 
 
-  private testdtDatas2: Object[] =
+ public  testdtDatas2: Object[] =
   [{ "c1": 1, "c2": 22, "c3": 33 },
   { "c1": 21, "c2": 55, "c3": 66 },
   { "c1": 34, "c2": 88, "c3": 99 }]
+
+
+
 
 
 
@@ -92,11 +90,6 @@ private testdtDatas: Object[] = [];
   
   }
 
-
-  public async dtchange(eventDataValue) {
-this.masterDetail.dtchange(eventDataValue);
-    };
-  
 mtsave(){
     this.masterDetail.mtsave(this.addmt);
     this.displayDialog=false;
@@ -117,10 +110,9 @@ dtsave(){
 }
 
 
-
-  public handleMtRowSelected(event) {
-    this.mtIndexValue = event.data.value;
-    this.dtchange(event.data.value);
+//mt單選一筆交換table
+  public MtRowSelect(event) {
+    this.masterDetail.dtchange(event.data.value);
   }
 
 
@@ -133,13 +125,17 @@ DtRowSelect(event){
 
 
 dtmodify(){
-console.log("sss"+this.testdtDatas);
       // this.masterDetail.findSelectedDtIndex();
     this.masterDetail.dtmodify(this.adddt);
    
      this.dtchdisplayDialog=false;
   
 }
+
+
+
+
+
 /*  dtmodify() {
     let temp = [...this.testdtDatas];
     temp[this.findSelectedDtIndex()] = this.adddt;

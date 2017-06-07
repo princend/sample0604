@@ -8,7 +8,7 @@
 
 <!--master-->
 <div class="left" [style.width]="masterWidth" style="overflow:auto;height:700px">
-    <p-dataTable [value]="testmtDatas" scrollable="true" [(selection)]="selectedValue" (onRowSelect)="onMtRowSelected($event)" selectionMode="multiple" [globalFilter]="gb">
+    <p-dataTable [value]="testmtDatas" scrollable="true" [(selection)]="selectedValue" (onRowSelect)="mtRowSelected($event)" selectionMode="multiple" [globalFilter]="gb">
 
 
         <p-column [style]="{ 'width':'50px' }">

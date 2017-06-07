@@ -7,7 +7,7 @@ import { BannerService } from '@cmuh/core';
 
 import { SampleModule } from './sample/sample.module';
 import { AppComponent } from './app.component';
-import { MasterDetailDemoModule } from "./master-detail02/demo";
+import { MasterDetailDemoModule } from "./master-detail01/demo";
 
 @NgModule({
   declarations: [
