@@ -1,5 +1,4 @@
-
 export class Mt {
-  public value;
-  constructor() { }
+    public value;
+    constructor() { }
 }

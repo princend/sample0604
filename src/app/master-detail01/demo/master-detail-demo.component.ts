@@ -26,8 +26,6 @@ export class MasterDetailDemoComponent implements OnInit {
   dtdisplayDialog: boolean;
   warningDisplayDialog: boolean;
   dtchdisplayDialog: boolean;
-  newMt:boolean;
-  newDt:boolean;
   addmt: Mt = new Mt();
   adddt:Dt=new Dt();
   private mtIndexValue;
@@ -48,21 +46,17 @@ private testdtDatas: Object[] = [];
   { "c1": 2, "c2": 5, "c3": 6 },
   { "c1": 3, "c2": 8, "c3": 9 }];
 
-
  private  testdtDatas2: Dt[] =
   [{ "c1": 1, "c2": 22, "c3": 33 },
   { "c1": 21, "c2": 55, "c3": 66 },
   { "c1": 34, "c2": 88, "c3": 99 }]
 
   testmtshowDialogToAdd() {
-    this.newMt = true;
     this.addmt = new Mt();
     this.displayDialog = true;
   }
 
   testdtshowDialogToAdd(){
-    
-    this.newDt = true;
     this.adddt = new Dt();
     this.dtdisplayDialog = true;
   
@@ -90,7 +84,7 @@ dtsave(){
 
 //mt單選一筆交換明細
   public MtRowSelect(event) {
-    this.masterDetail.dtchange(event.data.value);
+    this.masterDetail.dtchange();
   }
 
 

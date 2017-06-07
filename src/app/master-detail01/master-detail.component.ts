@@ -27,18 +27,18 @@ export class MasterDetailComponent implements OnInit {
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
+  private multidtDatas = [];
+  private testdtDatas3 = [];
   value: Mt = new Mt();
-  selectedValue: Mt;
-  newValue: boolean;
-  newdt: boolean;
+  selectedMt: Mt;
   adddt: Dt = new Dt();
-  selecteddt: Dt;
+  selectedDt: Dt;
   //mt新增
   mtsave(value) {
     let temp = [...this.testmtDatas];
     temp.push(value);
     this.testmtDatas = temp;
-    this.toastr.success('新增成功!', 'Success!');
+    this.toastr.success('新增成功!','Success!');
   }
   //master刪除
   mtdelete(rowValue) {
@@ -52,22 +52,20 @@ export class MasterDetailComponent implements OnInit {
     this.rightDivWidth = `70vw`;
     this.contentDivHeight = `${this.contentHeight}vh`;
   }
-
+  //mt找到項位
+  findSelectedMtIndex(): number {
+    return this.testmtDatas.indexOf(this.selectedMt[0]);
+  }
   //dt找到項位
   findSelectedDtIndex(): number {
-    return this.testdtDatas.indexOf(this.selecteddt[0]);
+    return this.testdtDatas.indexOf(this.selectedDt[0]);
   }
   //dt新增
   dtsave(adddt) {
     let temp = [...this.testdtDatas];
     temp.push(adddt)
     this.testdtDatas = temp;
-    if (this.mtIndexValue == this.testmtDatas[0].value) { //tehe
-      this.testdtDatas1 = temp;
-    }
-    else if (this.mtIndexValue == this.testmtDatas[1].value) {
-      this.testdtDatas2 = temp;
-    }
+    this.dtremain();
     this.toastr.success('新增成功!', 'Success!');
   }
   //dt修改
@@ -76,46 +74,61 @@ export class MasterDetailComponent implements OnInit {
     temp[this.findSelectedDtIndex()] = dt;
     this.testdtDatas = temp;
     dt = new Dt();
-    if (this.mtIndexValue == this.testmtDatas[0].value) {
-      this.testdtDatas1 = temp;
-    }
-    else if (this.mtIndexValue == this.testmtDatas[1].value) {
-      this.testdtDatas2 = temp;
-    }
+    this.dtremain();
     this.toastr.success('修改成功!', 'Success!');
     return this.testdtDatas;
   }
 
   //dtdatablechange
-  public async dtchange(eventdatavalue) {
-    if (eventdatavalue == this.testmtDatas[0].value) {
+
+  //方法一
+
+  /*
+    public async dtchange() {
+    this.multidtDatas = [this.testdtDatas1, this.testdtDatas2,...this.testdtDatas3];
+      for (var value in this.multidtDatas) {
+        let index = +value;
+        if (index == this.findSelectedMtIndex()) {
+          this.testdtDatas = this.multidtDatas[index];
+        }
+      }
+    };*/
+
+
+  //方法二
+  public async dtchange() {
+    if (this.mtIndexValue == this.testmtDatas[0].value) {
       this.testdtDatas = this.testdtDatas1;
     }
-    else if (eventdatavalue == this.testmtDatas[1].value) {
+    else if (this.mtIndexValue == this.testmtDatas[1].value) {
       this.testdtDatas = this.testdtDatas2;
     }
     else {
       this.testdtDatas = [];
     }
   };
-
   //dt刪除
   dtdelete(rowValue) {
     let index: number = this.testdtDatas.indexOf(rowValue);
     this.testdtDatas = this.testdtDatas.filter((val, i) => i != index);
     this.value = null;
+    this.dtremain();
+    this.toastr.warning('刪除成功', 'Success!');
+  }
 
+  //保留dt
+  public async dtremain() {
     if (this.mtIndexValue == this.testmtDatas[0].value) {
       this.testdtDatas1 = this.testdtDatas;
     }
     else if (this.mtIndexValue == this.testmtDatas[1].value) {
       this.testdtDatas2 = this.testdtDatas;
     }
-    this.toastr.warning('刪除成功', 'Success!');
-  }
-
+    else {
+      this.testdtDatas = [];
+    }
+  };
   //主檔選單一筆
-
   public mtRowSelected(event) {
     this.mtIndexValue = event.data.value;
     this.onMtRowSelect.emit(event);
