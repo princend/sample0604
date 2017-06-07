@@ -1,19 +1,8 @@
-<!--新增按鈕-->
-
-
-
 <!--master-->
 <div class="left" [style.width]="masterWidth" style="overflow:auto;height:700px">
-
-
-
-
     <p-dataTable [value]="testmtDatas" scrollable="true" [(selection)]="selectedValue" (onRowSelect)="mtRowSelected($event)" selectionMode="multiple" [globalFilter]="gb">
-
-
         <p-column [style]="{ 'width':'50px' }">
             <ng-template let-rowValue="rowData" pTemplate="body">
-
                 <a class="btn btn-warning" icon="fa-refresh" (click)="mtdelete(rowValue)" aria-label="Delete" style="color:white">
                     <i class="fa fa-close" aria-hidden="true"></i>
                 </a>
@@ -25,10 +14,7 @@
 
 <!--detail-->
 <div class="right" [style.width]="rightDivWidth" style="overflow:auto;height:700px">
-
-
     <p-dataTable [(value)]="testdtDatas" scrollable="true" [(selection)]="selecteddt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>
-
         <!--search-->
         <p-header>
             <div style="text-align:right">
@@ -36,7 +22,6 @@
                 <i class="fa fa-search" style="margin:3px"></i>
             </div>
         </p-header>
-
         <p-column [style]="{ 'width':'50px' }">
             <ng-template let-rowValue="rowData" pTemplate="body">
                 <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">
@@ -44,22 +29,9 @@
                 </a>
             </ng-template>
         </p-column>
-
-
         <p-column *ngFor="let column of testdtColumns" field="{{column.field}}" header="{{column.header}}" [style]="{'height':'30px'}" [sortable]="true">
 
         </p-column>
 
     </p-dataTable>
 </div>
-
-
-
-
-
-
-
-
-<!--警告彈窗-->
-<!--
-[style]="{'height':'30px'}"-->

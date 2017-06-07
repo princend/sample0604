@@ -1,7 +1,6 @@
-
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {Dt,Mt} from '../models';
-import { MasterDetailComponent } from "../master-detail1.component";
+import { MasterDetailComponent } from "../master-detail.component";
 @Component({
      selector: 'cmuh-master-detail-demo',
     templateUrl: 'master-detail-demo.component.html'
@@ -15,10 +14,6 @@ export class MasterDetailDemoComponent implements OnInit {
 
 
         ngOnInit() { }
-
-    private dtWidh:number=25;
-    private contentHeight:number=20;
-
 
     private contentDisplay:boolean=true;
 
@@ -41,7 +36,6 @@ private testdtColumns: Object[] =
   { "field": "c2", "header": "c2" },
   { "field": "c3", "header": "c3" }];
   ;
-
   private testmtDatas: Mt[] = [
     { "value": 1 },
     { "value": 2 }
@@ -49,13 +43,13 @@ private testdtColumns: Object[] =
 
 private testdtDatas: Object[] = [];
 
- public  testdtDatas1: Object[] =
+ private  testdtDatas1: Dt[] =
   [{ "c1": 1, "c2": 7, "c3": 3 },
   { "c1": 2, "c2": 5, "c3": 6 },
   { "c1": 3, "c2": 8, "c3": 9 }];
 
 
- public  testdtDatas2: Object[] =
+ private  testdtDatas2: Dt[] =
   [{ "c1": 1, "c2": 22, "c3": 33 },
   { "c1": 21, "c2": 55, "c3": 66 },
   { "c1": 34, "c2": 88, "c3": 99 }]
@@ -115,9 +109,6 @@ dtmodify(){
 
 
 //結束
-
-
-
 
 
 }

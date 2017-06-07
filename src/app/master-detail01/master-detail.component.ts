@@ -1,27 +1,24 @@
-import { Value } from './value';
 import { viewClassName } from '@angular/compiler/compiler';
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, AfterViewInit, AfterViewChecked, Directive, Renderer, ChangeDetectorRef, ViewContainerRef } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 
 import { ToastsManager } from "@cmuh/components/src/app/toast";
-
+import { Dt, Mt } from "./models";
 @Component({
   selector: 'cmuh-master-detail',
-  templateUrl: './master-detail1.component.html',
+  templateUrl: './master-detail.component.html',
   styleUrls: ['./master-detail.component.scss']
 })
 export class MasterDetailComponent implements OnInit {
   constructor(public toastr: ToastsManager, private vRef: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vRef);
   }
-  @Input() testmtDatas: PrimeValue[] = [];
-  @Input() testdtDatas: Object[] = [];
-  @Input() testdtDatas1: Object[] = [];
-  @Input() testdtDatas2: Object[] = [];
+  @Input() testmtDatas: Mt[] = [];
+  @Input() testdtDatas: Dt[] = [];
+  @Input() testdtDatas1: Dt[] = [];
+  @Input() testdtDatas2: Dt[] = [];
   @Input() testdtColumns: Object[] = [];
   @Input() mtSelection: string = "multiple";
- 
-  @Input() mtDatas: Object[] = [];
   @Input() mtIndexValue;
   @Input() contentDisplay: boolean = false;
   @Input() contentHeight: number = 30;
@@ -30,24 +27,19 @@ export class MasterDetailComponent implements OnInit {
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
-  private detailHeight: string = "";
-
-
-
-  value: PrimeValue = new PrimeValue();
-  selectedValue: PrimeValue;
+  value: Mt = new Mt();
+  selectedValue: Mt;
   newValue: boolean;
   newdt: boolean;
-  adddt: PrimeDt = new PrimeDt();
-  selecteddt: PrimeDt;
-
+  adddt: Dt = new Dt();
+  selecteddt: Dt;
+  //mt新增
   mtsave(value) {
     let temp = [...this.testmtDatas];
     temp.push(value);
     this.testmtDatas = temp;
     this.toastr.success('新增成功!', 'Success!');
   }
-
   //master刪除
   mtdelete(rowValue) {
     let index: number = this.testmtDatas.indexOf(rowValue);
@@ -59,7 +51,6 @@ export class MasterDetailComponent implements OnInit {
     this.masterWidth = `25vw`;
     this.rightDivWidth = `70vw`;
     this.contentDivHeight = `${this.contentHeight}vh`;
-    this.detailHeight = `${100 - this.contentHeight - 5}vh`;
   }
 
   //dt找到項位
@@ -84,7 +75,7 @@ export class MasterDetailComponent implements OnInit {
     let temp = [...this.testdtDatas];
     temp[this.findSelectedDtIndex()] = dt;
     this.testdtDatas = temp;
-    dt = new PrimeDt();
+    dt = new Dt();
     if (this.mtIndexValue == this.testmtDatas[0].value) {
       this.testdtDatas1 = temp;
     }
@@ -134,25 +125,13 @@ export class MasterDetailComponent implements OnInit {
     this.adddt = this.cloneDt(event.data);
     this.onDtRowSelect.emit(this.adddt);
   }
-
+  //明細連點選單一筆附帶資料
   cloneDt(c) {
-    let dt = new PrimeDt();
+    let dt = new Dt();
     for (let prop in c) {
       dt[prop] = c[prop];
     }
     return dt;
   }
 
-}
-
-export class PrimeValue {
-  public value;
-  constructor() { }
-}
-
-export class PrimeDt {
-  public c1;
-  public c2;
-  public c3;
-  constructor() { }
 }
