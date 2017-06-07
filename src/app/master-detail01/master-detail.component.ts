@@ -33,12 +33,21 @@ export class MasterDetailComponent implements OnInit {
   selectedMt: Mt;
   adddt: Dt = new Dt();
   selectedDt: Dt;
+
+
+  dtDatas;
+
+
+
+
+
+
   //mt新增
   mtsave(value) {
     let temp = [...this.testmtDatas];
     temp.push(value);
     this.testmtDatas = temp;
-    this.toastr.success('新增成功!','Success!');
+    this.toastr.success('新增成功!', 'Success!');
   }
   //master刪除
   mtdelete(rowValue) {
@@ -61,13 +70,22 @@ export class MasterDetailComponent implements OnInit {
     return this.testdtDatas.indexOf(this.selectedDt[0]);
   }
   //dt新增
+
+  //好的
   dtsave(adddt) {
     let temp = [...this.testdtDatas];
-    temp.push(adddt)
+    temp.push(adddt);
     this.testdtDatas = temp;
-    this.dtremain();
+    this.adddt = new Dt();
+    if (this.mtIndexValue == this.testmtDatas[0].value) {
+      this.testdtDatas1 = temp;
+    }
+    else if (this.mtIndexValue == this.testmtDatas[0].value) {
+      this.testdtDatas2 = temp;
+    }
     this.toastr.success('新增成功!', 'Success!');
   }
+
   //dt修改
   dtmodify(dt) {
     let temp = [...this.testdtDatas];
@@ -83,16 +101,15 @@ export class MasterDetailComponent implements OnInit {
 
   //方法一
 
-  /*
-    public async dtchange() {
-    this.multidtDatas = [this.testdtDatas1, this.testdtDatas2,...this.testdtDatas3];
-      for (var value in this.multidtDatas) {
-        let index = +value;
-        if (index == this.findSelectedMtIndex()) {
-          this.testdtDatas = this.multidtDatas[index];
+  /*  public async dtchange() {
+      this.multidtDatas=[this.testdtDatas1,this.testdtDatas2,...this.dtDatas]
+      for (var i in this.testmtDatas){
+        let index=+i;
+        if (this.findSelectedMtIndex()==index){
+          this.testdtDatas=this.multidtDatas[index];
         }
       }
-    };*/
+    }*/
 
 
   //方法二
@@ -107,6 +124,8 @@ export class MasterDetailComponent implements OnInit {
       this.testdtDatas = [];
     }
   };
+
+
   //dt刪除
   dtdelete(rowValue) {
     let index: number = this.testdtDatas.indexOf(rowValue);
@@ -117,7 +136,7 @@ export class MasterDetailComponent implements OnInit {
   }
 
   //保留dt
-  public async dtremain() {
+  public dtremain() {
     if (this.mtIndexValue == this.testmtDatas[0].value) {
       this.testdtDatas1 = this.testdtDatas;
     }
@@ -128,6 +147,9 @@ export class MasterDetailComponent implements OnInit {
       this.testdtDatas = [];
     }
   };
+
+
+
   //主檔選單一筆
   public mtRowSelected(event) {
     this.mtIndexValue = event.data.value;
