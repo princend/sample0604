@@ -2,7 +2,7 @@ import { Value } from './value';
 import { viewClassName } from '@angular/compiler/compiler';
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, AfterViewInit, AfterViewChecked, Directive, Renderer, ChangeDetectorRef, ViewContainerRef } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { GridColumn } from './models';
+
 import { ToastsManager } from "@cmuh/components/src/app/toast";
 
 @Component({
@@ -20,7 +20,7 @@ export class MasterDetailComponent implements OnInit {
   @Input() testdtDatas2: Object[] = [];
   @Input() testdtColumns: Object[] = [];
   @Input() mtSelection: string = "multiple";
-  @Input() mtColumns: GridColumn[] = [];
+ 
   @Input() mtDatas: Object[] = [];
   @Input() mtIndexValue;
   @Input() contentDisplay: boolean = false;
@@ -45,20 +45,8 @@ export class MasterDetailComponent implements OnInit {
     let temp = [...this.testmtDatas];
     temp.push(value);
     this.testmtDatas = temp;
-  
     this.toastr.success('新增成功!', 'Success!');
   }
-
-
-/*  mtsave(value) {
-    let temp = this.testmtDatas;
-    temp.push(value);
-    this.testmtDatas = [];
-    temp.forEach((value) => this.testmtDatas.push(value));
-    this.toastr.success('新增成功!', 'Success!');
-  }
-*/
-
 
   //master刪除
   mtdelete(rowValue) {
@@ -125,7 +113,7 @@ export class MasterDetailComponent implements OnInit {
     let index: number = this.testdtDatas.indexOf(rowValue);
     this.testdtDatas = this.testdtDatas.filter((val, i) => i != index);
     this.value = null;
-    
+
     if (this.mtIndexValue == this.testmtDatas[0].value) {
       this.testdtDatas1 = this.testdtDatas;
     }

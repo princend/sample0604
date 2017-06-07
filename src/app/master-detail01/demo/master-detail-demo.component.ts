@@ -1,6 +1,6 @@
 
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {GridColumn} from '../models';
+import {Dt,Mt} from '../models';
 import { MasterDetailComponent } from "../master-detail1.component";
 @Component({
      selector: 'cmuh-master-detail-demo',
@@ -123,16 +123,3 @@ dtmodify(){
 }
 
 
-
-export class Mt {
-  public value;
-  constructor() { }
-}
-
-
-export class Dt{
-      public c1;
-  public c2;
-  public c3;
-  constructor() { }
-}
