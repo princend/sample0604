@@ -13,13 +13,10 @@
 
     <!--子組件mt-->
     <div class="panel-body">
-        <cmuh-master-detail #md [mtWidth]="mtWidth" [(testmtDatas)]="testmtDatas" [(testdtDatas1)]="testdtDatas1" [(testdtDatas2)]="testdtDatas2" (onDtRowSelect)="DtRowSelect($event)" (onMtRowSelect)="MtRowSelect($event)" (mtSelectedevent)="SelectMt($event)"
-            (mtDatasChange)="dtDatasChange($event)" [contentDisplay]="contentDisplay" [contentHeight]="contentHeight" [testdtColumns]="testdtColumns" [(testdtDatas)]="testdtDatas" [dtSelection]="dtSelection" (dtSelectedevent)="SelectDt($event)" (dtDatasChange)="dtDatasChange($event)">
+        <cmuh-master-detail #md [(testmtDatas)]="testmtDatas" [(testdtDatas1)]="testdtDatas1" [(testdtDatas2)]="testdtDatas2" (onDtRowSelect)="DtRowSelect($event)" (onMtRowSelect)="MtRowSelect($event)" (mtSelectedevent)="SelectMt($event)" (mtDatasChange)="dtDatasChange($event)"
+            [contentDisplay]="contentDisplay" [contentHeight]="contentHeight" [testdtColumns]="testdtColumns" [(testdtDatas)]="testdtDatas" (dtSelectedevent)="SelectDt($event)" (dtDatasChange)="dtDatasChange($event)">
         </cmuh-master-detail>
     </div>
-
-
-
 </div>
 
 
@@ -42,6 +39,7 @@
         </div>
     </p-footer>
 </p-dialog>
+
 
 
 <!--adddt彈窗-->

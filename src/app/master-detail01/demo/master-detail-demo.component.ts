@@ -16,18 +16,10 @@ export class MasterDetailDemoComponent implements OnInit {
 
         ngOnInit() { }
 
-    private displayMt = false;
-    private displayDt = false;
-  
-    private mtSelectedRows:Object[]=[];
-    private dtSelectedRows:Object[]=[];
-
-    private mtSelectedRow:Object={};  
-    private mtWidth:number=25;
     private dtWidh:number=25;
     private contentHeight:number=20;
-   
-    private dtSelection:string="multiple";
+
+
     private contentDisplay:boolean=true;
 
 
@@ -102,7 +94,7 @@ dtsave(){
 }
 
 
-//mt單選一筆交換table
+//mt單選一筆交換明細
   public MtRowSelect(event) {
     this.masterDetail.dtchange(event.data.value);
   }

@@ -10,7 +10,7 @@ import { ToastsManager } from "@cmuh/components/src/app/toast";
   templateUrl: './master-detail1.component.html',
   styleUrls: ['./master-detail.component.scss']
 })
-export class MasterDetailComponent implements OnInit, OnChanges {
+export class MasterDetailComponent implements OnInit {
   constructor(public toastr: ToastsManager, private vRef: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vRef);
   }
@@ -19,23 +19,19 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   @Input() testdtDatas1: Object[] = [];
   @Input() testdtDatas2: Object[] = [];
   @Input() testdtColumns: Object[] = [];
-  @Input() mtWidth: number = 5;
   @Input() mtSelection: string = "multiple";
   @Input() mtColumns: GridColumn[] = [];
   @Input() mtDatas: Object[] = [];
+  @Input() mtIndexValue;
   @Input() contentDisplay: boolean = false;
   @Input() contentHeight: number = 30;
-  @Input() dtSelection: string = "multiple";
-
-
-
   @Output() onMtRowSelect = new EventEmitter<any>()
   @Output() onDtRowSelect = new EventEmitter<any>();
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
   private detailHeight: string = "";
-  @Input() mtIndexValue;
+
 
 
   value: PrimeValue = new PrimeValue();
@@ -43,24 +39,27 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   newValue: boolean;
   newdt: boolean;
   adddt: PrimeDt = new PrimeDt();
-  displayDialog: boolean;
-  dtdisplayDialog: boolean;
-  warningDisplayDialog: boolean;
-  dtchdisplayDialog: boolean;
   selecteddt: PrimeDt;
 
   mtsave(value) {
-    let temp = this.testmtDatas;
-    temp.push(value)
-    if (temp) {
-      this.testmtDatas = [];
-      for (let i = 0; i < temp.length; i++) {
-        this.testmtDatas.push(temp[i]);
-      }
-    }
-    this.displayDialog = false;
+    let temp = [...this.testmtDatas];
+    temp.push(value);
+    this.testmtDatas = temp;
+  
     this.toastr.success('新增成功!', 'Success!');
   }
+
+
+/*  mtsave(value) {
+    let temp = this.testmtDatas;
+    temp.push(value);
+    this.testmtDatas = [];
+    temp.forEach((value) => this.testmtDatas.push(value));
+    this.toastr.success('新增成功!', 'Success!');
+  }
+*/
+
+
   //master刪除
   mtdelete(rowValue) {
     let index: number = this.testmtDatas.indexOf(rowValue);
@@ -68,25 +67,13 @@ export class MasterDetailComponent implements OnInit, OnChanges {
     this.value = null;
     this.toastr.warning('刪除成功', 'Success!');
   }
-  //關閉彈窗
-  close() {
-    this.displayDialog = false;
-    this.dtdisplayDialog = false;
-    this.warningDisplayDialog = false;
-    this.dtchdisplayDialog = false;
-  }
-
-
   ngOnInit() {
-
-    this.masterWidth = `${this.mtWidth}vw`;
-    this.rightDivWidth = `${100 - this.mtWidth - 5}vw`;
+    this.masterWidth = `25vw`;
+    this.rightDivWidth = `70vw`;
     this.contentDivHeight = `${this.contentHeight}vh`;
     this.detailHeight = `${100 - this.contentHeight - 5}vh`;
   }
-  ngOnChanges() {
 
-  }
   //dt找到項位
   findSelectedDtIndex(): number {
     return this.testdtDatas.indexOf(this.selecteddt[0]);
@@ -95,12 +82,7 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   dtsave(adddt) {
     let temp = [...this.testdtDatas];
     temp.push(adddt)
-    if (temp) {
-      this.testdtDatas = [];
-      for (let i = 0; i < temp.length; i++) {
-        this.testdtDatas.push(temp[i]);
-      }
-    }
+    this.testdtDatas = temp;
     if (this.mtIndexValue == this.testmtDatas[0].value) { //tehe
       this.testdtDatas1 = temp;
     }
@@ -111,16 +93,14 @@ export class MasterDetailComponent implements OnInit, OnChanges {
   }
   //dt修改
   dtmodify(dt) {
-
     let temp = [...this.testdtDatas];
-
     temp[this.findSelectedDtIndex()] = dt;
     this.testdtDatas = temp;
     dt = new PrimeDt();
     if (this.mtIndexValue == this.testmtDatas[0].value) {
       this.testdtDatas1 = temp;
     }
-    else if (this.mtIndexValue ==  this.testmtDatas[1].value) {
+    else if (this.mtIndexValue == this.testmtDatas[1].value) {
       this.testdtDatas2 = temp;
     }
     this.toastr.success('修改成功!', 'Success!');
@@ -145,7 +125,7 @@ export class MasterDetailComponent implements OnInit, OnChanges {
     let index: number = this.testdtDatas.indexOf(rowValue);
     this.testdtDatas = this.testdtDatas.filter((val, i) => i != index);
     this.value = null;
-    this.dtdisplayDialog = false;
+    
     if (this.mtIndexValue == this.testmtDatas[0].value) {
       this.testdtDatas1 = this.testdtDatas;
     }
