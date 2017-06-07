@@ -7,7 +7,7 @@ import { MasterDetailComponent } from "../master-detail1.component";
     templateUrl: 'master-detail-demo.component.html'
 })
 
-export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
+export class MasterDetailDemoComponent implements OnInit {
 
 
     @ViewChild('md') masterDetail: MasterDetailComponent;
@@ -15,10 +15,7 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
 
 
         ngOnInit() { }
-    ngAfterViewInit(){
-   
-        
-    }
+
     private displayMt = false;
     private displayDt = false;
   
@@ -32,7 +29,7 @@ export class MasterDetailDemoComponent implements OnInit,AfterViewInit {
    
     private dtSelection:string="multiple";
     private contentDisplay:boolean=true;
-    private dtShowDeleteBtn:boolean=true;
+
 
 //移植到demo
 
@@ -70,11 +67,6 @@ private testdtDatas: Object[] = [];
   [{ "c1": 1, "c2": 22, "c3": 33 },
   { "c1": 21, "c2": 55, "c3": 66 },
   { "c1": 34, "c2": 88, "c3": 99 }]
-
-
-
-
-
 
   testmtshowDialogToAdd() {
     this.newMt = true;
@@ -123,34 +115,10 @@ DtRowSelect(event){
 
 
 
-
 dtmodify(){
-      // this.masterDetail.findSelectedDtIndex();
     this.masterDetail.dtmodify(this.adddt);
-   
      this.dtchdisplayDialog=false;
-  
 }
-
-
-
-
-
-/*  dtmodify() {
-    let temp = [...this.testdtDatas];
-    temp[this.findSelectedDtIndex()] = this.adddt;
-    this.testdtDatas = temp;
-    this.adddt = new PrimeDt();
-    this.dtchdisplayDialog = false;
-
-    if (this.mtIndexValue == 1) {
-      this.testdtDatas1 = temp;
-    }
-    else if (this.mtIndexValue == 2) {
-      this.testdtDatas2 = temp;
-    }
-     this.toastr.success('修改成功!', 'Success!');
-  }*/
 
 
 
