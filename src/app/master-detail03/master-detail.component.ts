@@ -123,6 +123,19 @@ selectedMt;
     return this.testdtDatas;
   }
 
+
+
+/* dtmodify(dt) {
+    let temp = [...this.testdtDatas];
+    temp[this.findSelectedDtIndex()] = dt;
+    this.testdtDatas = temp;
+    dt = new Dt();
+    this.dtremain();
+    this.toastr.success('修改成功!', 'Success!');
+    return this.testdtDatas;
+  }*/
+
+
   //dtdatablechange
 
   //方法一
