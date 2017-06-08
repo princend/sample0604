@@ -1,9 +1,11 @@
+
+
 import { viewClassName } from '@angular/compiler/compiler';
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, AfterViewInit, AfterViewChecked, Directive, Renderer, ChangeDetectorRef, ViewContainerRef } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 
 import { ToastsManager } from "@cmuh/components/src/app/toast";
-import { Dt, Mt } from "./models";
+import { Dt, Mt ,MasterDetail} from "./models";
 @Component({
   selector: 'cmuh-master-detail',
   templateUrl: './master-detail.component.html',
@@ -15,9 +17,15 @@ export class MasterDetailComponent implements OnInit {
   }
   @Input() testmtDatas: Mt[] = [];
   @Input() testdtDatas: Dt[] = [];
-  @Input() testdtDatas1: Dt[] = [];
+  @Input() testdtDatas1: Dt[] = 
+  [{ "c1": 1, "c2": 7, "c3": 3 },
+  { "c1": 2, "c2": 5, "c3": 6 },
+  { "c1": 3, "c2": 8, "c3": 9 }];
   @Input() testdtDatas2: Dt[] = [];
-  @Input() testdtColumns: Object[] = [];
+  @Input() testdtColumns: Object[] =   [{ field: "c1", header: "c1" },
+  { field: "c2", header: "c2" },
+  { field: "c3", header: "c3" }];
+  ;;
   @Input() mtSelection: string = "multiple";
   @Input() mtIndexValue;
   @Input() contentDisplay: boolean = false;
@@ -27,33 +35,37 @@ export class MasterDetailComponent implements OnInit {
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
-  private multidtDatas = [];
+
   private testdtDatas3 = [];
   value: Mt = new Mt();
-  selectedMt: Mt;
+
   adddt: Dt = new Dt();
   selectedDt: Dt;
-
-
   dtDatas;
 
 
 
+//測試區
 
+@Input() inputData :MasterDetail[]=[
 
+] 
+
+selectMt:MasterDetail[];
+selectedMt;
+//測試區結束
 
   //mt新增
   mtsave(value) {
-    let temp = [...this.testmtDatas];
-    temp.push(value);
-    this.testmtDatas = temp;
+    let newData:MasterDetail[] = this.inputData.concat({master: value,detail:[]});
+    this.inputData = [];
+    this.inputData = newData;
     this.toastr.success('新增成功!', 'Success!');
   }
   //master刪除
   mtdelete(rowValue) {
-    let index: number = this.testmtDatas.indexOf(rowValue);
-    this.testmtDatas = this.testmtDatas.filter((val, i) => i != index);
-    this.value = null;
+    let index: number = this.inputData.indexOf(rowValue);
+    this.inputData = this.inputData.filter((val, i) => i != index);
     this.toastr.warning('刪除成功', 'Success!');
   }
   ngOnInit() {
@@ -71,7 +83,19 @@ export class MasterDetailComponent implements OnInit {
   }
   //dt新增
 
+  //好的
   dtsave(adddt) {
+    let newDetail = this.selectedMt['detail'].concat(adddt);
+    this.selectedMt['detail'] = [];
+     this.selectedMt['detail'] = newDetail;
+    this.toastr.success('新增成功!', 'Success!');
+  }
+
+
+
+
+
+/*  dtsave(adddt) {
     let temp = [...this.testdtDatas];
     temp.push(adddt);
     this.testdtDatas = temp;
@@ -83,7 +107,10 @@ export class MasterDetailComponent implements OnInit {
       this.testdtDatas2 = temp;
     }
     this.toastr.success('新增成功!', 'Success!');
-  }
+  }*/
+
+
+
 
   //dt修改
   dtmodify(dt) {
@@ -111,8 +138,10 @@ export class MasterDetailComponent implements OnInit {
     }*/
 
 
-  //方法二
-  public async dtchange() {
+  //方法二 good
+/*  public async dtchange() {
+
+    console.log(this.multidtDatas[0]);
     if (this.mtIndexValue == this.testmtDatas[0].value) {
       this.testdtDatas = this.testdtDatas1;
     }
@@ -122,17 +151,22 @@ export class MasterDetailComponent implements OnInit {
     else {
       this.testdtDatas = [];
     }
-  };
+  };*/
 
 
   //dt刪除
   dtdelete(rowValue) {
-    let index: number = this.testdtDatas.indexOf(rowValue);
-    this.testdtDatas = this.testdtDatas.filter((val, i) => i != index);
-    this.value = null;
-    this.dtremain();
+this.selectedMt['detail'] = this.selectedMt['detail'].filter(value => { return value != rowValue});
     this.toastr.warning('刪除成功', 'Success!');
   }
+
+/*  mtdelete(rowValue) {
+    let index: number = this.inputData.indexOf(rowValue);
+    this.inputData = this.inputData.filter((val, i) => i != index);
+    this.toastr.warning('刪除成功', 'Success!');
+  }
+*/
+
 
   //保留dt
   public dtremain() {
@@ -151,14 +185,19 @@ export class MasterDetailComponent implements OnInit {
 
   //主檔選單一筆
   public mtRowSelected(event) {
-    this.mtIndexValue = event.data.value;
-    this.onMtRowSelect.emit(event);
+/*    this.mtIndexValue = event.data.value;
+    this.onMtRowSelect.emit(event);*/
+    this.selectedMt=this.selectMt[0];
+    //console.log(this.selectItem.detail);
   }
+
+
   //明細連點選單一筆
   DtRowSelect(event) {
     this.adddt = this.cloneDt(event.data);
     this.onDtRowSelect.emit(this.adddt);
   }
+
   //明細連點選單一筆附帶資料
   cloneDt(c) {
     let dt = new Dt();
@@ -169,3 +208,6 @@ export class MasterDetailComponent implements OnInit {
   }
 
 }
+
+
+

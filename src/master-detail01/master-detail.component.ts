@@ -71,6 +71,7 @@ export class MasterDetailComponent implements OnInit {
   }
   //dt新增
 
+  //好的
   dtsave(adddt) {
     let temp = [...this.testdtDatas];
     temp.push(adddt);

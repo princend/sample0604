@@ -1,0 +1,37 @@
+<!--master-->
+<div class="left" [style.width]="masterWidth" style="overflow:auto;height:700px">
+    <p-dataTable [value]="testmtDatas" scrollable="true" [(selection)]="selectedMt" (onRowSelect)="mtRowSelected($event)" selectionMode="multiple" [globalFilter]="gb">
+        <p-column [style]="{ 'width':'50px' }">
+            <ng-template let-rowValue="rowData" pTemplate="body">
+                <a class="btn btn-warning" icon="fa-refresh" (click)="mtdelete(rowValue)" aria-label="Delete" style="color:white">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                </a>
+            </ng-template>
+        </p-column>
+        <p-column field="value" header="master名稱" [style]="{'height':'30px'}"></p-column>
+    </p-dataTable>
+</div>
+
+<!--detail-->
+<div class="right" [style.width]="rightDivWidth" style="overflow:auto;height:700px">
+    <p-dataTable [(value)]="testdtDatas" scrollable="true" [(selection)]="selectedDt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>
+        <!--search-->
+        <p-header>
+            <div style="text-align:right">
+                <input #gb type="text" pInputText size="30" placeholder="請輸入查詢條件">
+                <i class="fa fa-search" style="margin:3px"></i>
+            </div>
+        </p-header>
+        <p-column [style]="{ 'width':'50px' }">
+            <ng-template let-rowValue="rowData" pTemplate="body">
+                <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                </a>
+            </ng-template>
+        </p-column>
+        <p-column *ngFor="let column of testdtColumns" field="{{column.field}}" header="{{column.header}}" [style]="{'height':'30px'}" [sortable]="true">
+
+        </p-column>
+
+    </p-dataTable>
+</div>
