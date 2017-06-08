@@ -23,7 +23,7 @@
             </div>
         </p-header>
         <p-column [style]="{ 'width':'50px' }">
-            <ng-template let-rowValue="rowData" pTemplate="body">
+            <ng-template let-rowValue="rowData" let-i="index" pTemplate="body">
                 <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">
                     <i class="fa fa-close" aria-hidden="true"></i>
                 </a>

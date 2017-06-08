@@ -1,3 +1,4 @@
+import { templateJitUrl } from '@angular/compiler';
 
 
 import { viewClassName } from '@angular/compiler/compiler';
@@ -32,6 +33,7 @@ export class MasterDetailComponent implements OnInit {
   @Input() contentHeight: number = 30;
   @Output() onMtRowSelect = new EventEmitter<any>()
   @Output() onDtRowSelect = new EventEmitter<any>();
+  @Output() onEditDetail=new EventEmitter();
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
@@ -75,15 +77,14 @@ selectedMt;
   }
   //mt找到項位
   findSelectedMtIndex(): number {
-    return this.testmtDatas.indexOf(this.selectedMt[0]);
+    return this.inputData.indexOf(this.selectedMt);
   }
   //dt找到項位
   findSelectedDtIndex(): number {
-    return this.testdtDatas.indexOf(this.selectedDt[0]);
+    return this.selectedMt.detail.indexOf(this.selectedDt[0]);
   }
   //dt新增
 
-  //好的
   dtsave(adddt) {
     let newDetail = this.selectedMt['detail'].concat(adddt);
     this.selectedMt['detail'] = [];
@@ -91,54 +92,78 @@ selectedMt;
     this.toastr.success('新增成功!', 'Success!');
   }
 
-
-
-
-
-/*  dtsave(adddt) {
-    let temp = [...this.testdtDatas];
-    temp.push(adddt);
-    this.testdtDatas = temp;
-    this.adddt = new Dt();
-    if (this.mtIndexValue == this.testmtDatas[0].value) {
-      this.testdtDatas1 = temp;
-    }
-    else if (this.mtIndexValue == this.testmtDatas[0].value) {
-      this.testdtDatas2 = temp;
-    }
-    this.toastr.success('新增成功!', 'Success!');
-  }*/
-
-
-
-
   //dt修改
-  dtmodify(dt) {
-    let temp = [...this.testdtDatas];
-    temp[this.findSelectedDtIndex()] = dt;
-    this.testdtDatas = temp;
-    dt = new Dt();
-    this.dtremain();
+  dtmodify(adddt) {
+      let x=this.findSelectedMtIndex();
+  let y=this.findSelectedDtIndex();
+
+
+ // this.inputData[x].detail[y]=adddt;
+
+  //console.log(this.selectedMt['detail'][this.findSelectedDtIndex()]);
+
+
+
+
+  let temp=this.inputData;
+this.inputData=[];
+temp[x].detail[y]=adddt;
+this.inputData=temp;
+
+
+
+
+
+console.log(this.inputData);
+  this.onEditDetail.emit(this.inputData);
     this.toastr.success('修改成功!', 'Success!');
-    return this.testdtDatas;
+    return this.inputData;
   }
 
 
 
-/* dtmodify(dt) {
-    let temp = [...this.testdtDatas];
-    temp[this.findSelectedDtIndex()] = dt;
-    this.testdtDatas = temp;
-    dt = new Dt();
-    this.dtremain();
-    this.toastr.success('修改成功!', 'Success!');
-    return this.testdtDatas;
-  }*/
+
+/*
+空陣列方法
+let temp=this.inputData;
+this.inputData=[];
+temp[x].detail[y]=adddt;
+this.inputData=temp;
+
+*/
 
 
-  //dtdatablechange
+/*private inputData:MasterDetail[] =[
+{     master: 1 ,detail:[{ c1: 1, c2: 7, c3: 3 },
+  { c1: 2, c2: 5, c3: 6 },
+  { c1: 3, c2: 8,c3: 9 }] },
+  {master:2,detail:[{ c1: 1, c2: 22, c3: 33 },
+  { c1: 21, c2: 55, c3: 66 },
+  { c1: 34, c2: 88, c3: 99 }]}
 
-  //方法一
+] 
+
+*/
+
+
+
+
+
+
+
+  //dt刪除
+  dtdelete(rowValue) {
+this.selectedMt['detail'] = this.selectedMt['detail'].filter(value => { return value != rowValue});
+    this.toastr.warning('刪除成功', 'Success!');
+  }
+
+
+
+
+
+
+
+
 
   /*  public async dtchange() {
       this.multidtDatas=[this.testdtDatas1,this.testdtDatas2,...this.dtDatas]
@@ -151,62 +176,17 @@ selectedMt;
     }*/
 
 
-  //方法二 good
-/*  public async dtchange() {
-
-    console.log(this.multidtDatas[0]);
-    if (this.mtIndexValue == this.testmtDatas[0].value) {
-      this.testdtDatas = this.testdtDatas1;
-    }
-    else if (this.mtIndexValue == this.testmtDatas[1].value) {
-      this.testdtDatas = this.testdtDatas2;
-    }
-    else {
-      this.testdtDatas = [];
-    }
-  };*/
-
-
-  //dt刪除
-  dtdelete(rowValue) {
-this.selectedMt['detail'] = this.selectedMt['detail'].filter(value => { return value != rowValue});
-    this.toastr.warning('刪除成功', 'Success!');
-  }
-
-/*  mtdelete(rowValue) {
-    let index: number = this.inputData.indexOf(rowValue);
-    this.inputData = this.inputData.filter((val, i) => i != index);
-    this.toastr.warning('刪除成功', 'Success!');
-  }
-*/
-
-
-  //保留dt
-  public dtremain() {
-    if (this.mtIndexValue == this.testmtDatas[0].value) {
-      this.testdtDatas1 = this.testdtDatas;
-    }
-    else if (this.mtIndexValue == this.testmtDatas[1].value) {
-      this.testdtDatas2 = this.testdtDatas;
-    }
-    else {
-      this.testdtDatas = [];
-    }
-  };
-
 
 
   //主檔選單一筆
   public mtRowSelected(event) {
-/*    this.mtIndexValue = event.data.value;
-    this.onMtRowSelect.emit(event);*/
     this.selectedMt=this.selectMt[0];
-    //console.log(this.selectItem.detail);
   }
 
 
   //明細連點選單一筆
   DtRowSelect(event) {
+    
     this.adddt = this.cloneDt(event.data);
     this.onDtRowSelect.emit(this.adddt);
   }

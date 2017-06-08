@@ -35,7 +35,8 @@ private inputData:MasterDetail[] =[
   warningDisplayDialog: boolean;
   dtchdisplayDialog: boolean;
   addmt: Mt = new Mt();
-  adddt:Dt=new Dt();
+  //adddt:Dt=new Dt();
+  adddt;
   private mtIndexValue;
 private testdtColumns: Object[] =
   [{ "field": "c1", "header": "c1" },
@@ -104,12 +105,14 @@ DtRowSelect(event){
 
 
 dtmodify(){
-    this.masterDetail.dtmodify(this.adddt);
+
+  this.inputData= this.masterDetail.dtmodify(this.adddt);
      this.dtchdisplayDialog=false;
 }
 
-
-
+editDetail(event){
+this.inputData=event;
+}
 //結束
 
 
