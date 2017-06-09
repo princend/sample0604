@@ -14,7 +14,10 @@
 
 <!--detail-->
 <div class="right" [style.width]="rightDivWidth" style="overflow:auto;height:700px">
-    <p-dataTable [value]="selectedMt?.detail" scrollable="true" [(selection)]="selectedDt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>
+    <p-dataTable [value]="dtDataToRender" scrollable="true" [(selection)]="selectedDt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>
+        <!-- <p-dataTable [value]="selectedMt?.detail" scrollable="true" [(selection)]="selectedDt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>-->
+
+
         <!--search-->
         <p-header>
             <div style="text-align:right">

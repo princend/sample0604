@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import {Dt,Mt,MasterDetail} from '../models';
 import { MasterDetailComponent } from "../master-detail.component";
 @Component({
@@ -6,7 +6,7 @@ import { MasterDetailComponent } from "../master-detail.component";
     templateUrl: 'master-detail-demo.component.html'
 })
 
-export class MasterDetailDemoComponent implements OnInit {
+export class MasterDetailDemoComponent implements OnInit,OnChanges {
 
 
     @ViewChild('md') masterDetail: MasterDetailComponent;
@@ -20,7 +20,7 @@ export class MasterDetailDemoComponent implements OnInit {
 
 //移植到demo
 
-private inputData:MasterDetail[] =[
+ inputData:MasterDetail[] =[
 {     master: 1 ,detail:[{ c1: 1, c2: 7, c3: 3 },
   { c1: 2, c2: 5, c3: 6 },
   { c1: 3, c2: 8,c3: 9 }] },
@@ -105,13 +105,24 @@ DtRowSelect(event){
 
 
 dtmodify(){
-
-  this.inputData= this.masterDetail.dtmodify(this.adddt);
+  this.masterDetail.dtmodify(this.adddt);
+  console.log(this.inputData)
      this.dtchdisplayDialog=false;
+
+}
+
+
+ngOnChanges() {
+
+  //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+  //Add 'implements OnChanges' to the class.
+  
 }
 
 editDetail(event){
 this.inputData=event;
+/*console.log(event);
+console.log(this.inputData);*/
 }
 //結束
 
