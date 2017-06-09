@@ -15,8 +15,6 @@
 <!--detail-->
 <div class="right" [style.width]="rightDivWidth" style="overflow:auto;height:700px">
     <p-dataTable [value]="dtDataToRender" scrollable="true" [(selection)]="selectedDt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>
-        <!-- <p-dataTable [value]="selectedMt?.detail" scrollable="true" [(selection)]="selectedDt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>-->
-
 
         <!--search-->
         <p-header>
@@ -25,6 +23,8 @@
                 <i class="fa fa-search" style="margin:3px"></i>
             </div>
         </p-header>
+        <!--search-->
+
         <p-column [style]="{ 'width':'50px' }">
             <ng-template let-rowValue="rowData" let-i="index" pTemplate="body">
                 <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">

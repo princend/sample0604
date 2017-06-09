@@ -1,9 +1,6 @@
 <div>
     <div class="panel-heading">元件</div>
-
-
     <!--新增按鈕-->
-
     <cmuh-toolbar>
         <div>
             <button class="btn btn-default" type="button" (click)="testmtshowDialogToAdd()" label="Add">AddMt</button>
@@ -13,14 +10,10 @@
 
     <!--子組件mt-->
     <div class="panel-body">
-        <cmuh-master-detail #md [(inputData)]="inputData" [(testmtDatas)]="testmtDatas" [(testdtDatas1)]="testdtDatas1" [(testdtDatas2)]="testdtDatas2" (onDtRowSelect)="DtRowSelect($event)" (mtDatasChange)="dtDatasChange($event)" [contentDisplay]="contentDisplay"
-            [testdtColumns]="testdtColumns" [(testdtDatas)]="testdtDatas" (dtSelectedevent)="SelectDt($event)" (dtDatasChange)="dtDatasChange($event)">
+        <cmuh-master-detail #md [(inputData)]="inputData" [(testmtDatas)]="testmtDatas" (onDtRowSelect)="DtRowSelect($event)" [contentDisplay]="contentDisplay" [testdtColumns]="testdtColumns">
         </cmuh-master-detail>
     </div>
 </div>
-
-
-
 
 
 <!--mt彈窗-->
@@ -39,7 +32,6 @@
         </div>
     </p-footer>
 </p-dialog>
-
 
 
 <!--adddt彈窗-->
