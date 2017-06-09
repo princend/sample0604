@@ -5,12 +5,14 @@
         <div>
             <button class="btn btn-default" type="button" (click)="testmtshowDialogToAdd()" label="Add">AddMt</button>
             <button class="btn btn-default" type="button" (click)="testdtshowDialogToAdd()" label="Adddt">AddDt</button>
+            <button class="btn btn-default" type="button" (click)="onShowMt()" id="tehe">master{{xxx}}</button>
+            <input type="checkbox" value="test" (click)="onShowMt()">
         </div>
     </cmuh-toolbar>
 
     <!--子組件mt-->
     <div class="panel-body">
-        <cmuh-master-detail #md [(inputData)]="inputData" [(testmtDatas)]="testmtDatas" (onDtRowSelect)="DtRowSelect($event)" [contentDisplay]="contentDisplay" [testdtColumns]="testdtColumns">
+        <cmuh-master-detail #md [(inputData)]="inputData" (onDtRowSelect)="DtRowSelect($event)" [contentDisplay]="contentDisplay" [testdtColumns]="testdtColumns" [showMt]="showMt">
         </cmuh-master-detail>
     </div>
 </div>

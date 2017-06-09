@@ -1,3 +1,4 @@
+
 import { templateJitUrl } from '@angular/compiler';
 
 
@@ -16,7 +17,6 @@ export class MasterDetailComponent implements OnInit {
   constructor(public toastr: ToastsManager, private vRef: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vRef);
   }
-  @Input() testmtDatas: Mt[] = [];
   @Input() testdtColumns: Object[] = [];
   @Input() dtIndex;
   @Input() mtIndex;
@@ -25,20 +25,23 @@ export class MasterDetailComponent implements OnInit {
   @Input() contentHeight: number = 30;
   @Output() onDtRowSelect = new EventEmitter<any>();
 
+  @Input()showMt:boolean=true;
+
+
 
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
 
-  adddt: Dt = new Dt();
+  adddt;
   selectedDt;
   dtDataToRender: any[];
 
   //測試區
 
-  @Input() inputData: MasterDetail[] =  [];
+  @Input() inputData: MasterDetail[] = [];
   selectMt: MasterDetail[];
-  selectedMt:MasterDetail;
+  selectedMt: MasterDetail;
 
   ngOnInit() {
     this.masterWidth = `25vw`;
@@ -97,7 +100,6 @@ export class MasterDetailComponent implements OnInit {
   //主檔選單一筆
   public mtRowSelected(event) {
     this.selectedMt = this.selectMt[0];
-    console.log(this.selectedMt)
     this.dtUpdateDataToRender(this.selectedMt.detail);
   }
 
@@ -109,13 +111,13 @@ export class MasterDetailComponent implements OnInit {
 
   //明細連點選單一筆附帶資料
   cloneDt(c) {
-    let dt = new Dt();
-    for (let prop in c) {
-      dt[prop] = c[prop];
+    let dt = [];
+    for (let index in c) {
+      dt[index] = c[index];
     }
     return dt;
   }
-  
+
   //mt找到項位
   findSelectedMtIndex(): number {
     return this.inputData.indexOf(this.selectedMt);
@@ -125,6 +127,12 @@ export class MasterDetailComponent implements OnInit {
   findSelectedDtIndex(): number {
     return this.selectedMt.detail.indexOf(this.selectedDt[0]);
   }
+
+
+
+onShowMt(){
+console.log("tehe");
+}
 
 
 

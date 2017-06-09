@@ -6,7 +6,7 @@ import { MasterDetailComponent } from "../master-detail.component";
   templateUrl: 'master-detail-demo.component.html'
 })
 
-export class MasterDetailDemoComponent implements OnInit, OnChanges {
+export class MasterDetailDemoComponent implements OnInit {
 
   @ViewChild('md') masterDetail: MasterDetailComponent;
   constructor() { }
@@ -22,10 +22,7 @@ export class MasterDetailDemoComponent implements OnInit, OnChanges {
   { "field": "c3", "header": "c3" }];
   ;
 
-  private testmtDatas: Mt[] = [
-    { "value": 1 },
-    { "value": 2 }
-  ];
+
 
   private inputData: MasterDetail[] = [
     {
@@ -39,53 +36,71 @@ export class MasterDetailDemoComponent implements OnInit, OnChanges {
       { c1: 34, c2: 88, c3: 99 }]
     }
   ]
-  private displayDialog: boolean;
-  private dtdisplayDialog: boolean;
+  private displayDialog: boolean;          
+  private dtdisplayDialog: boolean;      
   private warningDisplayDialog: boolean;
   private dtchdisplayDialog: boolean;
   private addmt: Mt;
   private adddt: Dt;
-
-
+  private showMt:boolean=true;
+  private xxx='隱藏';
+  private test;
+//跳出新增mt彈窗
   testmtshowDialogToAdd() {
     this.addmt = new Mt();
     this.displayDialog = true;
   }
-
+//跳出新增dt彈窗
   testdtshowDialogToAdd() {
     this.adddt = new Dt();
     this.dtdisplayDialog = true;
 
   }
-
+//mt新增
   mtsave() {
     this.masterDetail.mtsave(this.addmt.value);
     this.displayDialog = false;
   }
-
+//關閉彈窗
   close() {
     this.displayDialog = false;
     this.dtdisplayDialog = false;
     this.warningDisplayDialog = false;
     this.dtchdisplayDialog = false;
   }
-
+//dt新增
   dtsave() {
     this.masterDetail.dtsave(this.adddt);
     this.dtdisplayDialog = false;
   }
-
+//dt DoubleClick 單選一筆
   DtRowSelect(event) {
     this.adddt = event;
     this.dtchdisplayDialog = true;
   }
-
+//dt修改
   dtmodify() {
     this.masterDetail.dtmodify(this.adddt);
     this.dtchdisplayDialog = false;
   }
-  ngOnChanges() {
+
+
+onShowMt(){
+  
+console.log(this.xxx);
+   console.log(typeof(this.xxx));
+ console.log(this.test);
+     if( this.xxx='顯示')
+  {this.xxx='隱藏';}
+ 
+  if(this.xxx='隱藏'){
+    this.xxx='顯示';
   }
+
+
+ // this.masterDetail.onShowMt();
+}
+
 }
 
 
