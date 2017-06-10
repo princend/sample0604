@@ -131,12 +131,20 @@ export class MasterDetailComponent implements OnInit {
 
 
 onShowMt(){
-console.log("tehe");
+if(this.showMt==true){
+this.showMt=false
+this.masterWidth=`0vw`;
+ this.rightDivWidth = `95vw`;
+}
+else{
+  this.showMt=true;
+  this.masterWidth=`25vw`;
+   this.rightDivWidth = `70vw`;
 }
 
 
 
 }
 
-
+}
 
