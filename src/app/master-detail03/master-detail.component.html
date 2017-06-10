@@ -12,29 +12,43 @@
     </p-dataTable>
 </div>
 
-<!--detail-->
-<div class="right" [style.width]="rightDivWidth" style="overflow:auto;height:700px">
-    <p-dataTable [value]="dtDataToRender" scrollable="true" [(selection)]="selectedDt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>
+<!--right-->
+<div class="rightDiv" [style.width]="rightDivWidth" style="overflow:auto;height:700px">
 
-        <!--search-->
-        <p-header>
-            <div style="text-align:right">
-                <input #gb type="text" pInputText size="30" placeholder="請輸入查詢條件">
-                <i class="fa fa-search" style="margin:3px"></i>
-            </div>
-        </p-header>
-        <!--search-->
 
-        <p-column [style]="{ 'width':'50px' }">
-            <ng-template let-rowValue="rowData" let-i="index" pTemplate="body">
-                <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">
-                    <i class="fa fa-close" aria-hidden="true"></i>
-                </a>
-            </ng-template>
-        </p-column>
-        <p-column *ngFor="let column of testdtColumns" field="{{column.field}}" header="{{column.header}}" [style]="{'height':'30px'}" [sortable]="true">
 
-        </p-column>
 
-    </p-dataTable>
+    <!--content-->
+    <div *ngIf="showCt" class="content" [style.height]="contentHeight">
+        <ng-content></ng-content>
+    </div>
+
+
+    <!--detail-->
+    <div class="detail" style="overflow:auto">
+        <p-dataTable [value]="dtDataToRender" scrollable="true" [(selection)]="selectedDt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>
+
+
+            <!--search-->
+            <p-header>
+                <div style="text-align:right">
+                    <input #gb type="text" pInputText size="30" placeholder="請輸入查詢條件">
+                    <i class="fa fa-search" style="margin:3px"></i>
+                </div>
+            </p-header>
+            <!--search-->
+
+            <p-column [style]="{ 'width':'50px' }">
+                <ng-template let-rowValue="rowData" let-i="index" pTemplate="body">
+                    <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">
+                        <i class="fa fa-close" aria-hidden="true"></i>
+                    </a>
+                </ng-template>
+            </p-column>
+            <p-column *ngFor="let column of testdtColumns" field="{{column.field}}" header="{{column.header}}" [style]="{'height':'30px'}" [sortable]="true">
+
+            </p-column>
+
+        </p-dataTable>
+    </div>
 </div>

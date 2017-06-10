@@ -22,17 +22,17 @@ export class MasterDetailComponent implements OnInit {
   @Input() mtIndex;
   @Input() mtSelection: string = "multiple";
   @Input() contentDisplay: boolean = false;
-  @Input() contentHeight: number = 30;
+
   @Output() onDtRowSelect = new EventEmitter<any>();
 
-  @Input()showMt:boolean=true;
-
+  @Input() showMt: boolean = true;
+  @Input() showCt: boolean = false;
 
 
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
-
+  private contentHeight: string = "";
   adddt;
   selectedDt;
   dtDataToRender: any[];
@@ -46,7 +46,7 @@ export class MasterDetailComponent implements OnInit {
   ngOnInit() {
     this.masterWidth = `25vw`;
     this.rightDivWidth = `70vw`;
-    this.contentDivHeight = `${this.contentHeight}vh`;
+    this.contentHeight = `30vh`;
   }
 
   //更新子組件dt dataTable
@@ -130,21 +130,30 @@ export class MasterDetailComponent implements OnInit {
 
 
 
-onShowMt(){
-if(this.showMt==true){
-this.showMt=false
-this.masterWidth=`0vw`;
- this.rightDivWidth = `95vw`;
-}
-else{
-  this.showMt=true;
-  this.masterWidth=`25vw`;
-   this.rightDivWidth = `70vw`;
-}
+  onShowMt() {
+    if (this.showMt == true) {
+      this.showMt = false
+      this.masterWidth = `0vw`;
+      this.rightDivWidth = `95vw`;
+    }
+    else {
+      this.showMt = true;
+      this.masterWidth = `25vw`;
+      this.rightDivWidth = `70vw`;
+    }
 
 
 
-}
+  }
+
+  onShowCt() {
+    if (this.showCt) {
+      this.showCt = false;
+    }
+    else
+      this.showCt = true;
+    console.log("tehe");
+  }
 
 }
 

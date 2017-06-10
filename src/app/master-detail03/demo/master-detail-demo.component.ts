@@ -44,7 +44,7 @@ export class MasterDetailDemoComponent implements OnInit {
   private adddt: Dt;
   private showMt:boolean=true;
   private mtbtValue='mt隱藏';
-
+  private ctbtValue='ct顯示';
 //跳出新增mt彈窗
   testmtshowDialogToAdd() {
     this.addmt = new Mt();
@@ -98,6 +98,19 @@ else{
 
 
 }
+
+
+
+onShowCt(){
+if(this.ctbtValue=='ct顯示')
+{
+  this.ctbtValue='ct隱藏'
+}
+else{
+  this.ctbtValue='ct顯示'
+};
+this.masterDetail.onShowCt();
 }
 
+}
 
