@@ -1,14 +1,26 @@
 <div>
     <div class="panel-heading">元件</div>
+
+
     <!--新增按鈕-->
+
     <cmuh-toolbar>
         <div>
             <button class="btn btn-default" type="button" (click)="testmtshowDialogToAdd()" label="Add">AddMt</button>
             <button class="btn btn-default" type="button" (click)="testdtshowDialogToAdd()" label="Adddt">AddDt</button>
             <input class="btn btn-default" type="button" (click)="onShowMt()" [value]="mtbtValue">
             <input class="btn btn-default" type="button" (click)="onShowCt()" [value]="ctbtValue">
+
+            <input type="range" min="0" max="100" style="width:300px" [(ngModel)]="contentHeightValue" />
         </div>
     </cmuh-toolbar>
+    <dIV style="width:300px;height:50px;text-align:center;">
+        content高度: <input type="text" pInputText [(ngModel)]="contentHeightValue" style="width:100px">
+    </dIV>
+
+
+
+
 
     <!--子組件mt-->
     <div class="panel-body">

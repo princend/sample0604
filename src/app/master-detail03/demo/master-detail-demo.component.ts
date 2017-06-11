@@ -1,18 +1,24 @@
-import { AfterViewInit, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, ViewChild,DoCheck } from '@angular/core';
 import { Dt, Mt, MasterDetail } from '../models';
 import { MasterDetailComponent } from "../master-detail.component";
+
 @Component({
   selector: 'cmuh-master-detail-demo',
   templateUrl: 'master-detail-demo.component.html'
 })
 
-export class MasterDetailDemoComponent implements OnInit {
+export class MasterDetailDemoComponent implements OnInit,DoCheck{
 
   @ViewChild('md') masterDetail: MasterDetailComponent;
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+  
+   }
 
+ngDoCheck(){
+this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
+}
   private contentDisplay: boolean = true;
 
 
@@ -45,6 +51,10 @@ export class MasterDetailDemoComponent implements OnInit {
   private showMt:boolean=true;
   private mtbtValue='mt隱藏';
   private ctbtValue='ct顯示';
+
+
+  private contentHeightValue=30;
+  
 //跳出新增mt彈窗
   testmtshowDialogToAdd() {
     this.addmt = new Mt();
@@ -102,6 +112,7 @@ else{
 
 
 onShowCt(){
+
 if(this.ctbtValue=='ct顯示')
 {
   this.ctbtValue='ct隱藏'
@@ -111,6 +122,10 @@ else{
 };
 this.masterDetail.onShowCt();
 }
+
+
+
+
 
 }
 

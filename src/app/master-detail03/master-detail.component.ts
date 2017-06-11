@@ -28,11 +28,11 @@ export class MasterDetailComponent implements OnInit {
   @Input() showMt: boolean = true;
   @Input() showCt: boolean = false;
 
-
+ @Input() contentHeightValue:number=30;
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
-  private contentHeight: string = "";
+  @Input() contentHeight: string = "";
   adddt;
   selectedDt;
   dtDataToRender: any[];
@@ -46,7 +46,7 @@ export class MasterDetailComponent implements OnInit {
   ngOnInit() {
     this.masterWidth = `25vw`;
     this.rightDivWidth = `70vw`;
-    this.contentHeight = `30vh`;
+    this.contentHeight = `${this.contentHeightValue}vh`;
   }
 
   //更新子組件dt dataTable
@@ -152,7 +152,6 @@ export class MasterDetailComponent implements OnInit {
     }
     else
       this.showCt = true;
-    console.log("tehe");
   }
 
 }
