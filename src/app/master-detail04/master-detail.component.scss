@@ -4,13 +4,17 @@
     ;
 }
 
-.right {
+.rightDiv {
     display: inline-block;
-    width: 100%;
-    height: 100%;
+    .content {
+        width: 100%;
+    }
+    .detail {
+        width: 100%;
+    }
 }
 
- :host/deep/ .ui-datatable-thead tr .ui-state-default {
+:host/deep/ .ui-datatable-thead tr .ui-state-default {
     background-color: #008e77;
     color: #fff;
     line-height: 1.42857143;

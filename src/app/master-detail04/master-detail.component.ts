@@ -1,4 +1,6 @@
 
+import { templateJitUrl } from '@angular/compiler';
+
 
 import { viewClassName } from '@angular/compiler/compiler';
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, AfterViewInit, AfterViewChecked, Directive, Renderer, ChangeDetectorRef, ViewContainerRef } from '@angular/core';
@@ -26,7 +28,7 @@ export class MasterDetailComponent implements OnInit {
   @Input() showMt: boolean = true;
   @Input() showCt: boolean = false;
 
-  @Input() contentHeightValue: number = 30;
+ @Input() contentHeightValue:number=30;
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
@@ -34,10 +36,7 @@ export class MasterDetailComponent implements OnInit {
   adddt;
   selectedDt;
   dtDataToRender: any[];
-  @Input() searchValue: string = '';
 
-
-  @Input() inputDtdatas: any[] = [];
   //測試區
 
   @Input() inputData: MasterDetail[] = [];
@@ -155,49 +154,5 @@ export class MasterDetailComponent implements OnInit {
       this.showCt = true;
   }
 
-  onSearchClick() {
-    if(this.searchValue==''){
-       this.toastr.error('搜尋條件不能為空', 'Oops!');
-    }
-    else{
-    for (var x in this.inputData) {
-      for (var y in this.inputData[x].detail) {
-        this.inputDtdatas.push(this.inputData[x].detail[y])
-      }
-    }
-    this.inputDtdatas = this.inputDtdatas.filter(value => { return value.c1 == this.searchValue });
-      this.toastr.info(`搜尋條件為:${this.searchValue}`,'');
-    this.dtUpdateDataToRender(this.inputDtdatas);
-    this.inputDtdatas = [];
-    this.searchValue='';
-   
-  }
-  }
-
-
-
-
-  /*for (var x=0;x<this.inputData.length;x++){
-  for (var y=0;y<this.inputData[x].detail.length;y++){
-    this.inputDtdatas.push(this.inputData[x].detail[y])
-  }
-  }
-  */
-
-
-
-  /*  [
-      {
-        master: 1, detail: [{ c1: 1, c2: 7, c3: 3 },
-        { c1: 2, c2: 5, c3: 6 },
-        { c1: 3, c2: 8, c3: 9 }]
-      },
-      {
-        master: 2, detail: [{ c1: 1, c2: 22, c3: 33 },
-        { c1: 21, c2: 55, c3: 66 },
-        { c1: 34, c2: 88, c3: 99 }]
-      }
-    ]
-  */
 }
 

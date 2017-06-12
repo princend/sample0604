@@ -1,7 +1,6 @@
 <!--master-->
 <div class="left" [style.width]="masterWidth" style="overflow:auto;height:700px">
-    <p-dataTable *ngIf="showMt" [(value)]="inputData" scrollable="true" [(selection)]="selectMt" (onRowSelect)="mtRowSelected($event)" [globalFilter]="gb" selectionMode="multiple">
-        <!--     [globalFilter]="gb"-->
+    <p-dataTable *ngIf="showMt" [(value)]="inputData" scrollable="true" [(selection)]="selectMt" (onRowSelect)="mtRowSelected($event)" selectionMode="multiple" [globalFilter]="gb">
         <p-column [style]="{ 'width':'50px' }">
             <ng-template let-rowValue="rowData" pTemplate="body">
                 <a class="btn btn-warning" icon="fa-refresh" (click)="mtdelete(rowValue)" aria-label="Delete" style="color:white">
@@ -28,28 +27,13 @@
     <!--detail-->
     <div class="detail" style="overflow:auto">
         <p-dataTable [value]="dtDataToRender" scrollable="true" [(selection)]="selectedDt" selectionMode="multiple" (onRowDblclick)="DtRowSelect($event)" [globalFilter]="gb" #dt>
-            <!-- [globalFilter]="gb"-->
-
-
-
-
 
 
             <!--search-->
             <p-header>
-
-                <!--global search-->
-
-                <!--                <div style="text-align:right">
-                    <input #gb type="text" pInputText size="30" placeholder="請輸入查詢條件" [(ngModel)]="searchValue">
-                    <i class="fa fa-search" style="margin:3px" (click)="onSearchClick()"></i>
-                </div>-->
-
-
-                <!--跨master search-->
                 <div style="text-align:right">
-                    <input type="text" pInputText size="30" placeholder="請輸入查詢條件" [(ngModel)]="searchValue" (submit)="onSearchClick()">
-                    <i class="fa fa-search fa-2x" style="margin:3px" (click)="onSearchClick()"></i>
+                    <input #gb type="text" pInputText size="30" placeholder="請輸入查詢條件">
+                    <i class="fa fa-search" style="margin:3px"></i>
                 </div>
             </p-header>
             <!--search-->
