@@ -16,23 +16,24 @@ export class MasterDetailComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vRef);
   }
   @Input() testdtColumns: Object[] = []; //明細欄位
-  @Input() mtIndex;//主檔選擇項位
-  @Input() dtIndex;//明細選擇項位
-  @Input() mtSelection: string = "multiple";//主檔多選擇
   @Input() inputData: MasterDetail[] = [];//輸入資料
-  @Input() inputDtdatas: any[] = [];//明細資料
   @Input() showMt: boolean = true;//主檔顯示隱藏
   @Input() showCt: boolean = false;//內容顯示隱藏
   @Input() contentHeightValue: number = 30;//內容高度值
-  @Input() searchValue: string = '';//搜尋條件
-  @Output() onDtRowSelect = new EventEmitter<any>();//明細修改事件
-  private masterWidth: string = "";
-  private rightDivWidth: string = "";
-  private contentDivHeight: string = "";
   @Input() contentHeight: string = "";//內容高度
-  adddt;
-  selectedDt;
-  dtDataToRender: any[];
+  @Output() onDtRowSelect = new EventEmitter<any>();//明細修改事件
+  @Output() onMtRowSelect = new EventEmitter<any>();//主檔修改事件
+  private mtIndex;//主檔選擇項位
+  private dtIndex;//明細選擇項位
+  private searchValue: string = '';//搜尋條件
+  private inputDtdatas: any[] = [];//明細資料
+  private masterWidth: string = "";//mt寬度
+  private rightDivWidth: string = "";//右分頁寬度
+
+  private addmt;//主檔單筆增加 值
+  private adddt; //明細單筆增加 值
+  private selectedDt;//明細選擇單筆
+  private dtDataToRender: any[];//更新明細table
 
 
 
@@ -61,10 +62,19 @@ export class MasterDetailComponent implements OnInit {
 
   //mt新增
   mtsave(value) {
+    console.log(value);
     let newData: MasterDetail[] = this.inputData.concat({ master: value, detail: [] });
     this.inputData = newData;
     this.toastr.success('新增成功!', 'Success!');
   }
+
+//mt修改
+mtmodify(addmt){
+  console.log(addmt);
+let mtIndex=this.findSelectedMtIndex();
+this.selectedMt.master=addmt;
+this.toastr.success('修改成功!', 'Success!');
+}
 
   //mt刪除
   mtdelete(rowValue) {
@@ -75,6 +85,7 @@ export class MasterDetailComponent implements OnInit {
 
   //dt新增
   dtsave(adddt) {
+     // console.log(adddt);
     let newDetail = this.selectedMt['detail'].concat(adddt);
     this.selectedMt['detail'] = newDetail;
     this.dtUpdateDataToRender(this.selectedMt.detail);
@@ -82,6 +93,7 @@ export class MasterDetailComponent implements OnInit {
   }
   //dt修改
   dtmodify(adddt) {
+  //  console.log(adddt);
     let mtIndex = this.findSelectedMtIndex();
     let dtIndex = this.findSelectedDtIndex();
     this.selectedMt.detail[dtIndex] = adddt;
@@ -107,7 +119,11 @@ export class MasterDetailComponent implements OnInit {
     this.adddt = this.cloneDt(event.data);
     this.onDtRowSelect.emit(this.adddt);
   }
-
+//主檔連點選單一筆
+  MtRowSelect(event) {
+    this.addmt=event.data.master;
+  this.onMtRowSelect.emit(this.addmt);
+  }
   //明細連點選單一筆附帶資料
   cloneDt(c) {
     let dt = [];
@@ -116,6 +132,7 @@ export class MasterDetailComponent implements OnInit {
     }
     return dt;
   }
+
 
   //mt找到項位
   findSelectedMtIndex(): number {

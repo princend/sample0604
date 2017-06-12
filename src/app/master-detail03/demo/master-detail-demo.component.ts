@@ -1,3 +1,5 @@
+
+
 import { AfterViewInit, Component, OnChanges, OnInit, ViewChild,DoCheck } from '@angular/core';
 import { Dt, Mt, MasterDetail } from '../models';
 import { MasterDetailComponent } from "../master-detail.component";
@@ -46,14 +48,14 @@ this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
   ]
   private displayDialog: boolean;          
   private dtdisplayDialog: boolean;      
-  private warningDisplayDialog: boolean;
+  private mtchdisplayDialog:boolean;
   private dtchdisplayDialog: boolean;
   private addmt: Mt;
   private adddt: Dt;
   private showMt:boolean=true;
   private mtbtValue='mt隱藏';
   private ctbtValue='ct顯示';
-
+  
 
   private contentHeightValue=30;
   
@@ -77,7 +79,7 @@ this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
   close() {
     this.displayDialog = false;
     this.dtdisplayDialog = false;
-    this.warningDisplayDialog = false;
+    this.mtchdisplayDialog=false;
     this.dtchdisplayDialog = false;
   }
 //dt新增
@@ -90,8 +92,22 @@ this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
     this.adddt = event;
     this.dtchdisplayDialog = true;
   }
+
+// mt DoubleClick 單選一筆
+MtRowSelect(event){
+  this.addmt=new Mt()
+  this.addmt.value=event;
+  this.mtchdisplayDialog = true;
+}
+
+//mt修改
+mtmodify(){
+  this.masterDetail.mtmodify(this.addmt.value);
+  this.mtchdisplayDialog=false;
+}
 //dt修改
   dtmodify() {
+    console.log(this.adddt);
     this.masterDetail.dtmodify(this.adddt);
     this.dtchdisplayDialog = false;
   }
