@@ -19,7 +19,8 @@ export class MasterDetailDemoComponent implements OnInit,DoCheck{
 ngDoCheck(){
 this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
 }
-  private contentDisplay: boolean = true;
+  
+
 
 
   private testdtColumns: Object[] =

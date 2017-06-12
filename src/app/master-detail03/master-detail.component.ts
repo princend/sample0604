@@ -15,32 +15,30 @@ export class MasterDetailComponent implements OnInit {
   constructor(public toastr: ToastsManager, private vRef: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vRef);
   }
-  @Input() testdtColumns: Object[] = [];
-  @Input() dtIndex;
-  @Input() mtIndex;
-  @Input() mtSelection: string = "multiple";
-  @Input() contentDisplay: boolean = false;
-
-  @Output() onDtRowSelect = new EventEmitter<any>();
-
-  @Input() showMt: boolean = true;
-  @Input() showCt: boolean = false;
-
-  @Input() contentHeightValue: number = 30;
+  @Input() testdtColumns: Object[] = []; //明細欄位
+  @Input() mtIndex;//主檔選擇項位
+  @Input() dtIndex;//明細選擇項位
+  @Input() mtSelection: string = "multiple";//主檔多選擇
+  @Input() inputData: MasterDetail[] = [];//輸入資料
+  @Input() inputDtdatas: any[] = [];//明細資料
+  @Input() showMt: boolean = true;//主檔顯示隱藏
+  @Input() showCt: boolean = false;//內容顯示隱藏
+  @Input() contentHeightValue: number = 30;//內容高度值
+  @Input() searchValue: string = '';//搜尋條件
+  @Output() onDtRowSelect = new EventEmitter<any>();//明細修改事件
   private masterWidth: string = "";
   private rightDivWidth: string = "";
   private contentDivHeight: string = "";
-  @Input() contentHeight: string = "";
+  @Input() contentHeight: string = "";//內容高度
   adddt;
   selectedDt;
   dtDataToRender: any[];
-  @Input() searchValue: string = '';
 
 
-  @Input() inputDtdatas: any[] = [];
+
   //測試區
 
-  @Input() inputData: MasterDetail[] = [];
+
   selectMt: MasterDetail[];
   selectedMt: MasterDetail;
 
@@ -156,22 +154,22 @@ export class MasterDetailComponent implements OnInit {
   }
 
   onSearchClick() {
-    if(this.searchValue==''){
-       this.toastr.error('搜尋條件不能為空', 'Oops!');
+    if (this.searchValue == '') {
+      this.toastr.error('搜尋條件不能為空', 'Oops!');
     }
-    else{
-    for (var x in this.inputData) {
-      for (var y in this.inputData[x].detail) {
-        this.inputDtdatas.push(this.inputData[x].detail[y])
+    else {
+      for (var x in this.inputData) {
+        for (var y in this.inputData[x].detail) {
+          this.inputDtdatas.push(this.inputData[x].detail[y])
+        }
       }
+      this.inputDtdatas = this.inputDtdatas.filter(value => { return value.c1 == this.searchValue });
+      this.toastr.info(`搜尋條件為: ${this.searchValue}`, '  ');
+      this.dtUpdateDataToRender(this.inputDtdatas);
+      this.inputDtdatas = [];
+      this.searchValue = '';
+
     }
-    this.inputDtdatas = this.inputDtdatas.filter(value => { return value.c1 == this.searchValue });
-      this.toastr.info(`搜尋條件為: ${this.searchValue}`,'  ');
-    this.dtUpdateDataToRender(this.inputDtdatas);
-    this.inputDtdatas = [];
-    this.searchValue='';
-   
-  }
   }
 
 
