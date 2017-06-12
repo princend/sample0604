@@ -39,7 +39,8 @@ this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
     {
       master: 2, detail: [{ c1: 1, c2: 22, c3: 33 },
       { c1: 21, c2: 55, c3: 66 },
-      { c1: 34, c2: 88, c3: 99 }]
+      { c1: 34, c2: 88, c3: 99 },
+      { c1: '61a', c2: '24b', c3: '87c' }]
     }
   ]
   private displayDialog: boolean;          
@@ -94,7 +95,7 @@ this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
     this.dtchdisplayDialog = false;
   }
 
-
+//mt顯示隱藏
 onShowMt(){
 if(this.mtbtValue=='mt隱藏')
 {
@@ -110,7 +111,7 @@ else{
 }
 
 
-
+//content顯示隱藏
 onShowCt(){
 
 if(this.ctbtValue=='ct顯示')

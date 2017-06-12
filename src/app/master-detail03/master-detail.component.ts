@@ -166,7 +166,7 @@ export class MasterDetailComponent implements OnInit {
       }
     }
     this.inputDtdatas = this.inputDtdatas.filter(value => { return value.c1 == this.searchValue });
-      this.toastr.info(`搜尋條件為:${this.searchValue}`,'');
+      this.toastr.info(`搜尋條件為: ${this.searchValue}`,'  ');
     this.dtUpdateDataToRender(this.inputDtdatas);
     this.inputDtdatas = [];
     this.searchValue='';
