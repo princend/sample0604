@@ -188,25 +188,54 @@ export class MasterDetailComponent implements OnInit {
         let searchResult = [];
         for (var i in temp) {
           let j = +i;
-          let char2 = temp[i] + temp[j + 1];
-          let char3 = char2 + temp[j + 2];
-          let char4 = char3 + temp[j + 3];
-          let char5 = char4 + temp[j + 4];
-          let char6 = char5 + temp[j + 5];
-          let char7 = char6 + temp[j + 6];
+          let char = [];
+          char[0] = temp[i] + temp[j + 1];
+          for (var z = 0; z <= 5; z++) {
+            char[z + 1] = char[z] + temp[j + 2 + z];
+          }
           let sV = this.searchValue;
           if (temp[i] == sV ||
-            char2 == sV ||
-            char3 == sV ||
-            char4 == sV ||
-            char5 == sV ||
-            char6 == sV ||
-            char7 == sV) {
+            char[0] == sV ||
+            char[1] == sV ||
+            char[2] == sV ||
+            char[3] == sV ||
+            char[4] == sV ||
+            char[5] == sV) {
             return searchResult;
           }
         }
       });
 
+
+
+      /*
+            //檢查每一個c1裡面的字元有無符合
+            //最多搜尋七個字元
+            this.inputDtdatas = this.inputDtdatas.filter(value => {
+              let c1Value;
+              c1Value = String(value.c1);
+              let temp = [...c1Value]; //slice c1Value
+              let searchResult = [];
+              for (var i in temp) {
+                let j = +i;
+                let char2 = temp[i] + temp[j + 1];
+                let char3 = char2 + temp[j + 2];
+                let char4 = char3 + temp[j + 3];
+                let char5 = char4 + temp[j + 4];
+                let char6 = char5 + temp[j + 5];
+                let char7 = char6 + temp[j + 6];
+                let sV = this.searchValue;
+                if (temp[i] == sV ||
+                  char2 == sV ||
+                  char3 == sV ||
+                  char4 == sV ||
+                  char5 == sV ||
+                  char6 == sV ||
+                  char7 == sV) {
+                  return searchResult;
+                }
+              }
+            });*/
 
       //c1完全符合
       // this.inputDtdatas = this.inputDtdatas.filter(value => { return value.c1 == this.searchValue });
