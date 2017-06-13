@@ -21,7 +21,6 @@ export class MasterDetailDemoComponent implements OnInit,DoCheck{
 ngDoCheck(){
 this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
 }
-  
 
 
 
@@ -66,9 +65,13 @@ this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
   }
 //跳出新增dt彈窗
   testdtshowDialogToAdd() {
+    if(this.masterDetail.selectedMt!=undefined){
     this.adddt = new Dt();
     this.dtdisplayDialog = true;
-
+  }
+  else{
+    this.masterDetail.toastr.error('請選擇主檔', 'Oops!');
+  }
   }
 //mt新增
   mtsave() {
@@ -95,6 +98,7 @@ this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
 
 // mt DoubleClick 單選一筆
 MtRowSelect(event){
+  console.log(event);
   this.addmt=new Mt()
   this.addmt.value=event;
   this.mtchdisplayDialog = true;
@@ -107,7 +111,7 @@ mtmodify(){
 }
 //dt修改
   dtmodify() {
-    console.log(this.adddt);
+
     this.masterDetail.dtmodify(this.adddt);
     this.dtchdisplayDialog = false;
   }
