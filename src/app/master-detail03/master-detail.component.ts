@@ -1,3 +1,4 @@
+import { concat } from 'rxjs/operator/concat';
 
 
 import { viewClassName } from '@angular/compiler/compiler';
@@ -62,19 +63,17 @@ export class MasterDetailComponent implements OnInit {
 
   //mt新增
   mtsave(value) {
-    console.log(value);
     let newData: MasterDetail[] = this.inputData.concat({ master: value, detail: [] });
     this.inputData = newData;
     this.toastr.success('新增成功!', 'Success!');
   }
 
-//mt修改
-mtmodify(addmt){
-  console.log(addmt);
-let mtIndex=this.findSelectedMtIndex();
-this.selectedMt.master=addmt;
-this.toastr.success('修改成功!', 'Success!');
-}
+  //mt修改
+  mtmodify(addmt) {
+    let mtIndex = this.findSelectedMtIndex();
+    this.selectedMt.master = addmt;
+    this.toastr.success('修改成功!', 'Success!');
+  }
 
   //mt刪除
   mtdelete(rowValue) {
@@ -85,7 +84,6 @@ this.toastr.success('修改成功!', 'Success!');
 
   //dt新增
   dtsave(adddt) {
-     // console.log(adddt);
     let newDetail = this.selectedMt['detail'].concat(adddt);
     this.selectedMt['detail'] = newDetail;
     this.dtUpdateDataToRender(this.selectedMt.detail);
@@ -93,7 +91,6 @@ this.toastr.success('修改成功!', 'Success!');
   }
   //dt修改
   dtmodify(adddt) {
-  //  console.log(adddt);
     let mtIndex = this.findSelectedMtIndex();
     let dtIndex = this.findSelectedDtIndex();
     this.selectedMt.detail[dtIndex] = adddt;
@@ -119,10 +116,10 @@ this.toastr.success('修改成功!', 'Success!');
     this.adddt = this.cloneDt(event.data);
     this.onDtRowSelect.emit(this.adddt);
   }
-//主檔連點選單一筆
+  //主檔連點選單一筆
   MtRowSelect(event) {
-    this.addmt=event.data.master;
-  this.onMtRowSelect.emit(this.addmt);
+    this.addmt = event.data.master;
+    this.onMtRowSelect.emit(this.addmt);
   }
   //明細連點選單一筆附帶資料
   cloneDt(c) {
@@ -180,7 +177,41 @@ this.toastr.success('修改成功!', 'Success!');
           this.inputDtdatas.push(this.inputData[x].detail[y])
         }
       }
-      this.inputDtdatas = this.inputDtdatas.filter(value => { return value.c1 == this.searchValue });
+
+
+      //檢查每一個c1裡面的字元有無符合
+      //最多搜尋七個字元
+      this.inputDtdatas = this.inputDtdatas.filter(value => {
+        let c1Value;
+        c1Value = String(value.c1);
+        let temp = [...c1Value]; //slice c1Value
+        let searchResult = [];
+        for (var i in temp) {
+          let j = +i;
+          let char2 = temp[i] + temp[j + 1];
+          let char3 = char2 + temp[j + 2];
+          let char4 = char3 + temp[j + 3];
+          let char5 = char4 + temp[j + 4];
+          let char6 = char5 + temp[j + 5];
+          let char7 = char6 + temp[j + 6];
+          let sV = this.searchValue;
+          if (temp[i] == sV ||
+            char2 == sV ||
+            char3 == sV ||
+            char4 == sV ||
+            char5 == sV ||
+            char6 == sV ||
+            char7 == sV) {
+            return searchResult;
+          }
+        }
+      });
+
+
+      //c1完全符合
+      // this.inputDtdatas = this.inputDtdatas.filter(value => { return value.c1 == this.searchValue });
+
+
       this.toastr.info(`搜尋條件為: ${this.searchValue}`, '  ');
       this.dtUpdateDataToRender(this.inputDtdatas);
       this.inputDtdatas = [];
@@ -189,30 +220,5 @@ this.toastr.success('修改成功!', 'Success!');
     }
   }
 
-
-
-
-  /*for (var x=0;x<this.inputData.length;x++){
-  for (var y=0;y<this.inputData[x].detail.length;y++){
-    this.inputDtdatas.push(this.inputData[x].detail[y])
-  }
-  }
-  */
-
-
-
-  /*  [
-      {
-        master: 1, detail: [{ c1: 1, c2: 7, c3: 3 },
-        { c1: 2, c2: 5, c3: 6 },
-        { c1: 3, c2: 8, c3: 9 }]
-      },
-      {
-        master: 2, detail: [{ c1: 1, c2: 22, c3: 33 },
-        { c1: 21, c2: 55, c3: 66 },
-        { c1: 34, c2: 88, c3: 99 }]
-      }
-    ]
-  */
 }
 
