@@ -1,0 +1,15 @@
+:host/deep/ .ui-datatable-thead tr .ui-state-default {
+    background-color: #008e77;
+    color: #fff;
+    line-height: 1.42857143;
+}
+
+:host/deep/ .ui-datatable .ui-datatable-data tr.ui-datatable-even.ui-state-highlight {
+    background-color: #009FCC;
+    color: #ffffff;
+}
+
+ :host/deep/.ui-datatable .ui-datatable-data tr.ui-datatable-odd.ui-state-highlight {
+    background-color: #009FCC;
+    color: #ffffff;
+}

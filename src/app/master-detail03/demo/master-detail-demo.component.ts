@@ -98,7 +98,6 @@ this.masterDetail.contentHeight=`${this.contentHeightValue}vh`;
 
 // mt DoubleClick 單選一筆
 MtRowSelect(event){
-  console.log(event);
   this.addmt=new Mt()
   this.addmt.value=event;
   this.mtchdisplayDialog = true;

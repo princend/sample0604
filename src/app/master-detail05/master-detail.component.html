@@ -1,0 +1,18 @@
+<!--right-->
+
+
+<p-dataTable [value]="DataToRender" [scrollable]="isScrollable" [(selection)]="selectedData" [selectionMode]="selectionMode" (onRowClick)="rowClick($event)" (onRowDblclick)="rowDblclick($event)" [globalFilter]="gb">
+
+
+    <!--  按鈕功能-->
+    <p-column *ngIf="isShowDeleteButton">
+        <ng-template let-rowValue="rowData" let-i="index" pTemplate="body">
+            <a class="btn btn-warning" icon="fa-refresh" (click)="dtdelete(rowValue)" aria-label="Delete" style="color:white">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </a>
+        </ng-template>
+    </p-column>
+    <p-column *ngFor="let column of columns" field="{{ column.field }}" header="{{ column.header }}" [frozen]="column.frozen" [style]="{'width': column.width }" [sortable]="column.sortable" [hidden]="column.hidden">
+    </p-column>
+    <p-column *ngIf="isShowSelectCheckbox" selectionMode="multiple" [style]="{'width':'38px'}"></p-column>
+</p-dataTable>

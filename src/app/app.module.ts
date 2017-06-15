@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { BannerService } from '@cmuh/core';
 import { AppComponent } from './app.component';
-import { MasterDetailDemoModule } from "./master-detail03/demo";
+import { MasterDetailDemoModule } from "./master-detail05/demo";
 
 @NgModule({
   declarations: [

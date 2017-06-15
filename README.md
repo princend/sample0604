@@ -1,7 +1,9 @@
 # Sample
-
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.21.
-
+01版 mtdt資料分開版
+02版 單一component版
+03版 完整版 (跨master搜尋)
+04版 畫面搜尋版
+05版 only select 版
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 

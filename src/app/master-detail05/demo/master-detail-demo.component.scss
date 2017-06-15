@@ -1,0 +1,16 @@
+.masterDetail {
+    .left {
+        display: inline-block;
+        width: 30%;
+        vertical-align: top;
+    }
+    .right {
+        display: inline-block;
+        width: 65%;
+    }
+}
+
+p.tip span {
+    font-weight: bold;
+    color: red;
+}
