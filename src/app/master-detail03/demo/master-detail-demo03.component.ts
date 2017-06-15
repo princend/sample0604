@@ -2,16 +2,16 @@
 
 import { AfterViewInit, Component, OnChanges, OnInit, ViewChild,DoCheck } from '@angular/core';
 import { Dt, Mt, MasterDetail } from '../models';
-import { MasterDetailComponent } from "../master-detail.component";
+import { MasterDetailComponent03 } from "../master-detail03.component";
 
 @Component({
-  selector: 'cmuh-master-detail-demo',
-  templateUrl: 'master-detail-demo.component.html'
+  selector: 'cmuh-master-detail-demo03',
+  templateUrl: 'master-detail-demo03.component.html'
 })
 
-export class MasterDetailDemoComponent implements OnInit,DoCheck{
+export class MasterDetailDemoComponent03 implements OnInit,DoCheck{
 
-  @ViewChild('md') masterDetail: MasterDetailComponent;
+  @ViewChild('md') masterDetail: MasterDetailComponent03;
   constructor() { }
 
   ngOnInit() {

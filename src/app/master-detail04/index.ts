@@ -1,3 +1,3 @@
 
-export * from './master-detail.module';
+export * from './master-detail04.module';
 export * from './models';

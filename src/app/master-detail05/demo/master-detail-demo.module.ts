@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { DialogModule,SliderModule } from 'primeng/primeng';
 import { MasterDetailModule } from '../master-detail.module';
-import { MasterDetailDemoComponent } from './master-detail-demo.component';
+import { MasterDetailDemoComponent05 } from './master-detail-demo.component05';
 import {ToolbarModule} from '@cmuh/components/src/app/search-toolbar/toolbar';
 import {SearchToolbarModule} from '@cmuh/components/src/app/search-toolbar';
 import { LocationDialogModule } from "@cmuh/components/src/app/location-dialog";
@@ -22,8 +22,8 @@ import { DepartmentDialogModule } from "@cmuh/components/src/app/department-dial
         DepartmentDialogModule,
         SearchToolbarModule
     ],
-    exports: [MasterDetailDemoComponent],
-    declarations: [MasterDetailDemoComponent],
+    exports: [MasterDetailDemoComponent05],
+    declarations: [MasterDetailDemoComponent05],
     providers: [],
 })
 export class  MasterDetailDemoModule { }

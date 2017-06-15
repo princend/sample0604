@@ -8,11 +8,11 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { ToastsManager } from "@cmuh/components/src/app/toast";
 import { Dt, Mt, MasterDetail } from "./models";
 @Component({
-  selector: 'cmuh-master-detail',
-  templateUrl: './master-detail.component.html',
-  styleUrls: ['./master-detail.component.scss']
+  selector: 'cmuh-master-detail03',
+  templateUrl: './master-detail03.component.html',
+  styleUrls: ['./master-detail03.component.scss']
 })
-export class MasterDetailComponent implements OnInit {
+export class MasterDetailComponent03 implements OnInit {
   constructor(public toastr: ToastsManager, private vRef: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vRef);
   }

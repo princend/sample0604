@@ -1,4 +1,14 @@
 <div>
     <!-- <app-master-detail></app-master-detail>-->
-    <cmuh-master-detail-demo #md></cmuh-master-detail-demo>
+    <nav>
+       <h1> 請輸入URL切換分頁:</h1>
+        <div>
+            <input class="btn btn-default" type="button" value="跨搜尋版本" routerLink="/mt3">
+            
+            <input class="btn btn-default" type="button" value="全域搜尋" routerLink="/mt4">
+             <input class="btn btn-default" type="button" value="onlySelect版本" routerLink="/mt5">
+             </div>
+    </nav>
+   
+    <router-outlet></router-outlet>
 </div>

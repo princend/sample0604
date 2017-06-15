@@ -24,8 +24,8 @@
 
     <!--子組件mt-->
     <div class="panel-body">
-        <cmuh-master-detail #md [(inputData)]="inputData" (onDtRowSelect)="DtRowSelect($event)" [contentDisplay]="contentDisplay" [testdtColumns]="testdtColumns" [showMt]="showMt">
-        </cmuh-master-detail>
+        <cmuh-master-detail03 #md [(inputData)]="inputData" (onMtRowSelect)="MtRowSelect($event)" (onDtRowSelect)="DtRowSelect($event)" [testdtColumns]="testdtColumns" [showMt]="showMt">
+        </cmuh-master-detail03>
     </div>
 </div>
 
@@ -93,6 +93,23 @@
     <p-footer>
         <div>
             <button type="button" class="btn btn-success" (click)="dtmodify()" label="dtmodify">Save</button>
+            <button type="button" class="btn btn-warning" (click)="close()" label="dtClose">Cancel</button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+<!--dm修改彈窗-->
+<p-dialog id="dtch" header="mtmodify" [(visible)]="mtchdisplayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="addmt">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="value">value</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="value" style="width:80px" [(ngModel)]="addmt.value" /></div>
+        </div>
+    </div>
+    <p-footer>
+        <div>
+            <button type="button" class="btn btn-success" (click)="mtmodify()" label="mtmodify">Save</button>
             <button type="button" class="btn btn-warning" (click)="close()" label="dtClose">Cancel</button>
         </div>
     </p-footer>

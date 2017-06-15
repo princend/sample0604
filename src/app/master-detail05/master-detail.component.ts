@@ -29,7 +29,7 @@ export class MasterDetailComponent implements OnInit {
   @Input() isScrollable:boolean=true;//可否捲動
   @Input() tableHeight: string = "";//table高度
   @Input() isShowDeleteButton:boolean=false;//刪除按鈕顯示
-  @Input() isShowSelectCheckbox:boolean=true;//checkbox顯示
+  @Input() isShowSelectCheckbox:boolean=false;//checkbox顯示
   @Output() onRowDblclick = new EventEmitter<any>();//明細修改事件
   @Output() onRowClick =new EventEmitter<any>();
   private index;//單選選擇項位

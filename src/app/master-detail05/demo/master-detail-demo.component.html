@@ -1,43 +1,46 @@
 <div class="panel-body">
+<div class="tehe">
+    ━ ━ ━ ━ ━ ━ ┒
+    <div></div>
+    ┓┏┓┏┓┃ ah!~~~
+    <div></div>
+    ┛┗┛┗┛┃＼○／
+    <div></div>
+    ┓┏┓┏┓┃ /
+    <div></div>
+    ┛┗┛┗┛┃ノ)
+    <div></div>
+    ┓┏┓┏┓┃
+    <div></div>
+    ┛┗┛┗┛┃
+    <div></div>
+    ┓┏┓┏┓┃
+    <div></div>
+    ┛┗┛┗┛┃
+    <div></div>
+    ┓┏┓┏┓┃
+    <div></div>
+    ┛┗┛┗┛┃
+    <div></div>
+    ┓┏┓┏┓┃
+    <div></div>
+    ┃┃┃┃┃┃
+    <div></div>
+    ┻┻┻┻┻┻
 
-━ ━  ━ ━   ━   ━ ┒  
-<div></div> 
-┓┏┓┏┓┃       ah!~~~
-<div></div>                          
-┛┗┛┗┛┃＼○／  
-<div></div> 
-┓┏┓┏┓┃  /
-<div></div> 
-┛┗┛┗┛┃ノ)
-<div></div> 
-┓┏┓┏┓┃
-<div></div> 
-┛┗┛┗┛┃
-<div></div> 
-┓┏┓┏┓┃
-<div></div> 
-┛┗┛┗┛┃
-<div></div> 
-┓┏┓┏┓┃
-<div></div> 
-┛┗┛┗┛┃
-<div></div> 
-┓┏┓┏┓┃
-<div></div> 
-┃┃┃┃┃┃
-<div></div> 
-┻┻┻┻┻┻
-
-
+</div>
 
 
     <div class="masterDetail">
         <span class="left">
-            <cmuh-master-detail [(inputData)]="mtInputData" [columns]="mtColumn"  (onRowClick)="mtRowClick($event)" [isShowSelectCheckbox]="isShowMtSelectCheckbox">
+            <cmuh-master-detail [(inputData)]="mtInputData"
+             [columns]="mtColumn" 
+              (onRowClick)="mtRowClick($event)"
+               [isShowSelectCheckbox]="isShowMtSelectCheckbox">
             </cmuh-master-detail>
         </span>
         <span class="right">
-        <cmuh-master-detail  [columns]="dtcolumns" #md>
+        <cmuh-master-detail  [columns]="dtcolumns" [isShowSelectCheckbox]="isShowMtSelectCheckbox"#md>
             </cmuh-master-detail>
         </span>
     </div>
